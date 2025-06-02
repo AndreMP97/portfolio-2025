@@ -1,0 +1,53 @@
+import { iconMap, TIconName } from "constants/icons";
+
+export type TButtonLinkProps = {
+  /**
+   * The button aria-label
+   * @requires
+   */
+  ariaLabel: string;
+  /**
+   * The button href
+   * @requires
+   */
+  href: string;
+  /**
+   * The button label
+   * @requires
+   */
+  label: string;
+  /**
+   * The button left icon
+   */
+  leftIcon?: TIconName;
+  /**
+   * The button left icon
+   */
+  rightIcon?: TIconName;
+};
+
+export const ButtonLink: React.FC<TButtonLinkProps> = ({
+  ariaLabel,
+  href,
+  label,
+  leftIcon,
+  rightIcon,
+}) => {
+  const renderIcon = (icon: TIconName) => {
+    const Icon = iconMap[icon];
+
+    return <Icon size={28} />;
+  };
+
+  return (
+    <a
+      aria-label={ariaLabel}
+      className="border-aqua-mint text-aqua-mint hover:bg-bright-aqua hover:text-navy-blue z-10 flex items-center justify-center gap-4 rounded-md border px-7 py-4 text-lg leading-normal font-medium transition-colors"
+      href={href}
+    >
+      {leftIcon && renderIcon(leftIcon)}
+      <span>{label}</span>
+      {rightIcon && renderIcon(rightIcon)}
+    </a>
+  );
+};

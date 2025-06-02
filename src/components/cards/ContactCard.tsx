@@ -1,22 +1,17 @@
 // Icons
-import { FaEnvelope, FaLinkedin } from "react-icons/fa";
+import { ButtonLink, TButtonLinkProps } from "components/buttonLink";
 
-export type TEducationCardProps = {
+export type TContactCardProps = {
+  /**
+   * The contact card buttons
+   * @requires
+   */
+  buttons?: TButtonLinkProps[];
   /**
    * The contact card description
    * @requires
    */
   description: string;
-  /**
-   * The contact card description
-   * @requires
-   */
-  email: string;
-  /**
-   * The contact card description
-   * @requires
-   */
-  linkedin: string;
   /**
    * The contact card title
    * @requires
@@ -24,10 +19,9 @@ export type TEducationCardProps = {
   title: string;
 };
 
-export const ContactCard: React.FC<TEducationCardProps> = ({
+export const ContactCard: React.FC<TContactCardProps> = ({
+  buttons,
   description,
-  email,
-  linkedin,
   title,
 }) => {
   return (
@@ -40,24 +34,13 @@ export const ContactCard: React.FC<TEducationCardProps> = ({
           <p className="text-lavender-blue max-w-2xl text-lg leading-relaxed font-normal">
             {description}
           </p>
-          <div className="mt-4 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
-            <a
-              className="border-aqua-mint text-aqua-mint hover:bg-bright-aqua hover:text-navy-blue flex items-center justify-center gap-4 rounded-md border px-7 py-4 text-lg leading-normal font-medium transition-colors"
-              href={linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaLinkedin size={28} />
-              <span>LinkedIn Profile</span>
-            </a>
-            <a
-              className="border-aqua-mint text-aqua-mint hover:bg-bright-aqua hover:text-navy-blue flex items-center justify-center gap-4 rounded-md border px-7 py-4 text-lg leading-normal font-medium transition-colors"
-              href={`mailto:${email}`}
-            >
-              <FaEnvelope size={28} />
-              <span>Email</span>
-            </a>
-          </div>
+          {buttons && (
+            <div className="mt-4 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
+              {buttons.map((button) => (
+                <ButtonLink {...button} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

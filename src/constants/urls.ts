@@ -1,4 +1,5 @@
 export const urls = {
+  email: "mailto:andre.m.pacheco.97@gmail.com",
   github: "https://github.com/AndreMP97",
   linkedin: "https://www.linkedin.com/in/andrempacheco97",
   resume:
