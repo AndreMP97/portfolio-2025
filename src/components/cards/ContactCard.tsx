@@ -35,7 +35,7 @@ export const ContactCard: React.FC<TContactCardProps> = ({
             {description}
           </p>
           {buttons && (
-            <div className="mt-4 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
+            <div className="mt-4 flex flex-col gap-6 md:flex-row sm:items-center sm:gap-8">
               {buttons.map((button) => (
                 <ButtonLink {...button} />
               ))}
