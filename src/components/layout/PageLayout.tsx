@@ -24,7 +24,7 @@ export const PageLayout: React.FC = () => {
         }
 
         return (
-          <section key={section.id} id={section.id}>
+          <section key={section.id} className="scroll-mt-24" id={section.id}>
             <Component />
           </section>
         );
