@@ -1,6 +1,10 @@
+// Components
 import { Navbar } from "components/layout/Navbar";
 import { PageLayout } from "components/layout/PageLayout";
 import { Footer } from "components/layout/Footer";
+
+// Constants
+import { footerProps } from "constants/footer";
 
 const App = () => {
   return (
@@ -8,7 +12,7 @@ const App = () => {
       <div className="layout-container flex h-full grow flex-col">
         <Navbar />
         <PageLayout />
-        <Footer />
+        <Footer {...footerProps} />
       </div>
     </div>
   );
