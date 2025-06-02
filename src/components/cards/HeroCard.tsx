@@ -1,41 +1,32 @@
-import React from "react";
+import Photo from "assets/photo.jpg";
+import { ButtonLink } from "components/buttonLink";
+import { hero } from "constants/hero";
+import { urls } from "constants/urls";
 
-export type THeroCardProps = React.SVGProps<SVGSVGElement>;
-
-export const HeroCard: React.FC<THeroCardProps> = ({ className, ...rest }) => (
-  <svg
-    className={className}
-    fill="none"
-    viewBox="0 0 800 600"
-    xmlns="http://www.w3.org/2000/svg"
-    {...rest}
-  >
-    <defs>
-      <pattern
-        id="pattern-circles"
-        patternUnits="userSpaceOnUse"
-        x="0"
-        y="0"
-        width="40"
-        height="40"
-      >
-        <circle cx="20" cy="20" r="1.5" fill="#aqua-mint" />
-      </pattern>
-    </defs>
-    <rect width="100%" height="100%" fill="url(#pattern-circles)" />
-    <path
-      d="M-100 300 Q 150 100 400 300 T 900 300"
-      fill="none"
-      opacity="0.3"
-      stroke="#233554"
-      strokeWidth={60}
-    />
-    <path
-      d="M-100 400 Q 150 200 400 400 T 900 400"
-      fill="none"
-      opacity="0.2"
-      stroke="#112240"
-      strokeWidth={40}
-    />
-  </svg>
-);
+export const HeroCard: React.FC = () => {
+  return (
+    <div className="border-aqua-mint bg-midnight-navy relative mt-16 flex flex-col items-center justify-center gap-8 overflow-hidden rounded-2xl border-2 p-6 shadow-2xl md:flex-row md:p-8 lg:mt-20 lg:p-10">
+      <div className="order-2 flex flex-col items-start gap-4 text-left md:order-1">
+        <h1 className="text-4xl leading-tight font-bold tracking-tight text-white md:text-5xl md:leading-tight">
+          {hero.title}
+        </h1>
+        <h2 className="text-3xl leading-tight font-semibold tracking-tight text-white md:text-4xl md:leading-tight">
+          {hero.subtitle}
+        </h2>
+        <p className="text-lg leading-relaxed font-normal text-[#CCD6F6] md:text-xl md:leading-relaxed md:font-normal">
+          {hero.description}
+        </p>
+        <ButtonLink
+          ariaLabel="Resume download"
+          href={urls.resume}
+          label="Resume"
+        />
+      </div>
+      <img
+        className="border-aqua-mint order-1 aspect-square h-32 w-32 rounded-full border-2 bg-cover bg-center bg-no-repeat md:order-2 md:h-40 md:w-40 lg:h-48 lg:w-48"
+        src={Photo}
+        alt="André Pacheco Photo"
+      />
+    </div>
+  );
+};
