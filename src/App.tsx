@@ -8,12 +8,10 @@ import { footerProps } from "constants/footer";
 
 const App = () => {
   return (
-    <div className="dark group/design-root bg-navy-blue font-space-grotesk relative flex size-full min-h-screen flex-col overflow-x-hidden">
-      <div className="layout-container flex h-full grow flex-col">
-        <Navbar />
-        <PageLayout />
-        <Footer {...footerProps} />
-      </div>
+    <div className="bg-navy-blue font-space-grotesk relative flex min-h-screen flex-col overflow-x-hidden">
+      <Navbar />
+      <PageLayout />
+      <Footer {...footerProps} />
     </div>
   );
 };
