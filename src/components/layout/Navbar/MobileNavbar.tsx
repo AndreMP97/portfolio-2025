@@ -53,7 +53,7 @@ export const MobileNavbar: React.FC<TMobileNavbarProps> = ({
           initial={{ x: "100%" }}
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
-          transition={{ duration: 0.5, type: "tween" }}
+          transition={{ duration: 0.3, type: "tween" }}
         >
           <ul className="flex h-full flex-col items-center justify-center gap-8 text-xl">
             {navLinks.map((link) => (
