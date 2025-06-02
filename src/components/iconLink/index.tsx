@@ -1,6 +1,6 @@
-import { iconMap, TIconName } from "constants/icons";
+import { Icon, TIconProps } from "components/icon";
 
-export type TIconLinkProps = {
+export type TIconLinkProps = TIconProps & {
   /**
    * The icon aria-label
    * @requires
@@ -11,27 +11,14 @@ export type TIconLinkProps = {
    * @requires
    */
   href: string;
-  /**
-   * The icon name
-   * @requires
-   */
-  iconName: TIconName;
-  /**
-   * The icon size
-   * @optional
-   * @default 32
-   */
-  size?: number;
 };
 
 export const IconLink: React.FC<TIconLinkProps> = ({
   ariaLabel,
   href,
   iconName,
-  size = 32,
+  size,
 }) => {
-  const Icon = iconMap[iconName];
-
   return (
     <a
       aria-label={ariaLabel}
@@ -39,7 +26,7 @@ export const IconLink: React.FC<TIconLinkProps> = ({
       href={href}
       target="_blank"
     >
-      <Icon size={size} />
+      <Icon iconName={iconName} size={size} />
     </a>
   );
 };

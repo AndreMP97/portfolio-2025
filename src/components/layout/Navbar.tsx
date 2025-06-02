@@ -4,12 +4,10 @@ import { useState } from "react";
 // Framer-motion
 import { AnimatePresence, motion } from "framer-motion";
 
-// Assets
-import { FaBars, FaTimes } from "react-icons/fa";
-
 // Components
 import { MobileNavbar } from "./Navbar/MobileNavbar";
 import { DesktopNavbar } from "./Navbar/DesktopNavbar";
+import { Icon } from "components/icon";
 import { LogoLink, TLogoLinkProps } from "components/logoLink";
 
 // Constants
@@ -59,7 +57,11 @@ export const Navbar: React.FC<TNavbarProps> = ({ logoProps, navLinks }) => {
               exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
               transition={{ duration: 0.2 }}
             >
-              {isMobileMenuOpen ? <FaTimes size={28} /> : <FaBars size={28} />}
+              {isMobileMenuOpen ? (
+                <Icon iconName="FaTimes" />
+              ) : (
+                <Icon iconName="FaBars" />
+              )}
             </motion.span>
           </AnimatePresence>
         </button>

@@ -1,8 +1,9 @@
-// Constants
-import { iconMap } from "constants/icons";
+// Components
+import { Icon } from "components/icon";
 
 // Types
 import { educationCardType, TEducationCardType } from "./EducationCard.types";
+import { TIconName } from "constants/icons";
 
 export type TEducationCardProps = {
   /**
@@ -58,15 +59,13 @@ export const EducationCard: React.FC<TEducationCardProps> = ({
   title,
   type,
 }) => {
-  const Icon =
-    type === educationCardType.university
-      ? iconMap["FaGraduationCap"]
-      : iconMap["FaCertificate"];
+  const iconName: TIconName =
+    type === educationCardType.university ? "FaGraduationCap" : "FaCertificate";
 
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-4">
-        <Icon className="text-aqua-mint" size={32} />
+        <Icon className="text-aqua-mint" iconName={iconName} />
         <h3 className="text-xl leading-normal font-semibold text-white">
           {title}
         </h3>

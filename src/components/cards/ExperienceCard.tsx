@@ -1,4 +1,4 @@
-import { FaBriefcase } from "react-icons/fa";
+import { Icon } from "components/icon";
 
 export type TExperienceCardProps = {
   /**
@@ -55,7 +55,7 @@ export const ExperienceCard: React.FC<TExperienceCardProps> = ({
       target="_blank"
     >
       <div className="flex items-center gap-3">
-        <FaBriefcase className="text-aqua-mint" size={24} />
+        <Icon className="text-aqua-mint" iconName="FaBriefcase" />
         <h3 className="group-hover:text-aqua-mint text-xl leading-normal font-semibold text-white">
           {position}
         </h3>
