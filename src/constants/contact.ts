@@ -17,6 +17,6 @@ export const contact: TContactCardProps = {
     },
   ],
   description:
-    "I'm always open to discussing new projects, creative ideas, or opportunities to be part of something great. Feel free to reach out!",
+    "I'm always open to discuss new projects, ideas or opportunities.\nFeel free to reach out!",
   title: "Get in touch",
 };
