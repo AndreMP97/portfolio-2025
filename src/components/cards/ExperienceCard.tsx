@@ -2,6 +2,11 @@ import { FaBriefcase } from "react-icons/fa";
 
 export type TExperienceCardProps = {
   /**
+   * The experience card aria-label
+   * @requires
+   */
+  ariaLabel: string;
+  /**
    * The experience card bullet points
    * @requires
    */
@@ -17,6 +22,11 @@ export type TExperienceCardProps = {
    */
   endDate: string;
   /**
+   * The experience card href
+   * @requires
+   */
+  href: string;
+  /**
    * The experience card position
    * @requires
    */
@@ -29,17 +39,24 @@ export type TExperienceCardProps = {
 };
 
 export const ExperienceCard: React.FC<TExperienceCardProps> = ({
+  ariaLabel,
   bulletPoints,
   company,
   endDate,
+  href,
   position,
   startDate,
 }) => {
   return (
-    <div className="border-aqua-mint bg-midnight-navy hover:border-bright-aqua flex flex-col gap-3 rounded-lg border-l-2 p-5 pl-6 shadow-lg transition-colors duration-300 hover:shadow-2xl">
+    <a
+      aria-label={ariaLabel}
+      className="group border-aqua-mint bg-midnight-navy flex flex-col gap-3 rounded-lg border-l-2 p-5 pl-6 shadow-lg transition-all duration-300 hover:border-white hover:shadow-2xl"
+      href={href}
+      target="_blank"
+    >
       <div className="flex items-center gap-3">
         <FaBriefcase className="text-aqua-mint" size={24} />
-        <h3 className="text-xl leading-normal font-semibold text-white">
+        <h3 className="group-hover:text-aqua-mint text-xl leading-normal font-semibold text-white">
           {position}
         </h3>
       </div>
@@ -54,6 +71,6 @@ export const ExperienceCard: React.FC<TExperienceCardProps> = ({
           <li>{bulletPoint}</li>
         ))}
       </ul>
-    </div>
+    </a>
   );
 };
