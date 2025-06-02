@@ -2,8 +2,8 @@
 import { ContactCard } from "components/cards/ContactCard";
 
 // Constants
-import { contact } from "constants/contact";
+import { contactProps } from "constants/contact";
 
 export const ContactSection: React.FC = () => {
-  return <ContactCard {...contact} />;
+  return <ContactCard {...contactProps} />;
 };

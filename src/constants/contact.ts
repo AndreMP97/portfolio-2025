@@ -1,7 +1,7 @@
 import { urls } from "./urls";
 import { TContactCardProps } from "components/cards/ContactCard";
 
-export const contact: TContactCardProps = {
+export const contactProps: TContactCardProps = {
   buttons: [
     {
       ariaLabel: "LinkedIn Profile",
