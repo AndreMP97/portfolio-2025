@@ -15,51 +15,51 @@ export type TSection = {
   title: string;
   altTitle?: string;
   showInNavbar: boolean;
-  wrapInLayout: boolean;
+  showTitle: boolean;
 };
 
 export const sections: Record<TSectionKeys, TSection> = {
   [sectionKeys.hero]: {
     id: "hero",
     showInNavbar: false,
+    showTitle: false,
     title: "Hero",
-    wrapInLayout: false,
   },
   [sectionKeys.about]: {
     id: "about",
     showInNavbar: true,
+    showTitle: true,
     title: "About Me",
-    wrapInLayout: true,
   },
   [sectionKeys.skills]: {
     id: "skills",
     showInNavbar: true,
+    showTitle: true,
     title: "Skills",
-    wrapInLayout: true,
   },
   [sectionKeys.projects]: {
     id: "projects",
     showInNavbar: true,
+    showTitle: true,
     title: "Projects",
-    wrapInLayout: true,
   },
   [sectionKeys.experience]: {
     id: "experience",
     showInNavbar: true,
+    showTitle: true,
     title: "Experience",
-    wrapInLayout: true,
   },
   [sectionKeys.education]: {
     id: "education",
     showInNavbar: true,
+    showTitle: true,
     title: "Education",
-    wrapInLayout: true,
   },
   [sectionKeys.contact]: {
     altTitle: "Get in Touch",
     id: "contact",
     showInNavbar: true,
+    showTitle: false,
     title: "Contact",
-    wrapInLayout: false,
   },
 } as const;

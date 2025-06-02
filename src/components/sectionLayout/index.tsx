@@ -9,10 +9,10 @@ export type TSectionLayoutProps = {
    */
   id: string;
   /**
-   * The section id
-   * @requires
+   * The section title
+   * @optional
    */
-  title: string;
+  title?: string;
 };
 
 export const SectionLayout: React.FC<TSectionLayoutProps> = ({
@@ -22,10 +22,12 @@ export const SectionLayout: React.FC<TSectionLayoutProps> = ({
 }) => {
   return (
     <section className="flex scroll-mt-24 flex-col gap-6" id={id}>
-      <h2 className="text-3xl leading-tight font-bold tracking-tight text-white">
-        {title}
-      </h2>
-      <div className="w-full md:px-4">{children}</div>
+      {title && (
+        <h2 className="text-center text-3xl leading-tight font-bold tracking-tight text-white md:text-left">
+          {title}
+        </h2>
+      )}
+      <div className="section-container">{children}</div>
     </section>
   );
 };

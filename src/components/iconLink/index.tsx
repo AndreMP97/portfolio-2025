@@ -37,6 +37,7 @@ export const IconLink: React.FC<TIconLinkProps> = ({
       aria-label={ariaLabel}
       className="text-lavender-blue hover:text-aqua-mint transition-colors"
       href={href}
+      target="_blank"
     >
       <Icon size={size} />
     </a>
