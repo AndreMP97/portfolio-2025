@@ -1,51 +1,75 @@
-// Assets
-import Photo from "assets/photo.jpg";
+// React
+import { useState } from "react";
 
-// Constants
-import { sections } from "constants/sections";
-import { urls } from "constants/urls";
+// Framer-motion
+import { AnimatePresence, motion } from "framer-motion";
+
+// Assets
+import { FaBars, FaTimes } from "react-icons/fa";
 
 // Components
-import { NavLink } from "components/navLink";
+import { MobileNavbar } from "./Navbar/MobileNavbar";
+import { DesktopNavbar } from "./Navbar/DesktopNavbar";
+import { LogoLink, TLogoLinkProps } from "components/logoLink";
 
-export const Navbar: React.FC = () => {
+// Constants
+import { TSection } from "constants/sections";
+
+export type TNavbarProps = {
+  /**
+   * The navbar logo props
+   * @requires
+   */
+  logoProps: TLogoLinkProps;
+  /**
+   * The navbar links
+   * @requires
+   */
+  navLinks: TSection[];
+};
+
+export const Navbar: React.FC<TNavbarProps> = ({ logoProps, navLinks }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
   return (
-    <header className="border-b-space-blue fixed z-50 flex h-20 w-full items-center justify-center border-b border-solid px-10 py-3 whitespace-nowrap backdrop-blur-xs">
-      <nav className="container flex w-full flex-1 items-center justify-between">
-        {/* Logo */}
-        <a
-          className="font-great-vibes hover:text-aqua-mint -rotate-12 text-3xl leading-tight font-bold text-white"
-          href="#"
+    <header className="border-b-space-blue bg-navy-blue/70 fixed z-50 flex h-20 w-full items-center justify-center border-b border-solid whitespace-nowrap">
+      <nav
+        className="container-layout flex h-full flex-1 items-center justify-between backdrop-blur-xs"
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        <LogoLink {...logoProps} onClick={closeMobileMenu} />
+
+        <DesktopNavbar navLinks={navLinks} />
+
+        {/* Mobile Toggle Button */}
+        <button
+          className="text-2xl text-white focus:outline-none md:hidden"
+          onClick={toggleMobileMenu}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
-          AP
-        </a>
-        {/* Links */}
-        <div className="flex items-center gap-6">
-          {/* Nav Links */}
-          <ul className="flex items-center gap-6">
-            {Object.values(sections)
-              .filter((section) => section.showInNavbar)
-              .map((link) => (
-                <li key={link.id}>
-                  <NavLink {...link} />
-                </li>
-              ))}
-          </ul>
-          {/* LinkedIn link with picture */}
-          <a
-            className="border-space-blue size-12 rounded-full border-2"
-            href={urls.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              className="aspect-square rounded-full bg-cover bg-center bg-no-repeat hover:opacity-60"
-              src={Photo}
-              alt="Photo of André Pacheco"
-            />
-          </a>
-        </div>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={isMobileMenuOpen ? "close" : "menu"}
+              initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+              transition={{ duration: 0.2 }}
+            >
+              {isMobileMenuOpen ? <FaTimes size={28} /> : <FaBars size={28} />}
+            </motion.span>
+          </AnimatePresence>
+        </button>
       </nav>
+
+      <MobileNavbar
+        isOpen={isMobileMenuOpen}
+        navLinks={navLinks}
+        onClose={closeMobileMenu}
+      />
     </header>
   );
 };

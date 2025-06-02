@@ -5,11 +5,12 @@ import { Footer } from "components/layout/Footer";
 
 // Constants
 import { footerProps } from "constants/footer";
+import { navbarProps } from "constants/navbar";
 
 const App = () => {
   return (
     <div className="bg-navy-blue font-space-grotesk relative flex min-h-screen flex-col overflow-x-hidden">
-      <Navbar />
+      <Navbar {...navbarProps} />
       <PageLayout />
       <Footer {...footerProps} />
     </div>
