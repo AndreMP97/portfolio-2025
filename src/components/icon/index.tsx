@@ -1,4 +1,5 @@
 import { iconMap, TIconName } from "constants/icons";
+import { useMemo } from "react";
 import { IconBaseProps } from "react-icons";
 
 export type TIconProps = IconBaseProps & {
@@ -16,11 +17,18 @@ export type TIconProps = IconBaseProps & {
 };
 
 export const Icon: React.FC<TIconProps> = ({
+  className,
   iconName,
   size = 28,
   ...props
 }) => {
   const Icon = iconMap[iconName];
 
-  return <Icon size={size} {...props} />;
+  const rootClasses = useMemo(() => {
+    let result = "flex-shrink-0";
+    if (className) result = `${result} ${className}`;
+    return result;
+  }, [className]);
+
+  return <Icon className={rootClasses} size={size} {...props} />;
 };
