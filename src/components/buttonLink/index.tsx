@@ -37,7 +37,7 @@ export const ButtonLink: React.FC<TButtonLinkProps> = ({
   return (
     <a
       aria-label={ariaLabel}
-      className="border-aqua-mint text-aqua-mint hover:bg-bright-aqua hover:text-navy-blue md:w-auto\\ z-10 flex w-full min-w-20 items-center justify-center gap-4 rounded-md border px-7 py-4 text-lg leading-normal font-medium transition-colors"
+      className="border-aqua-mint text-aqua-mint hover:bg-bright-aqua hover:text-navy-blue z-10 flex w-full min-w-20 items-center justify-center gap-4 self-center rounded-md border px-7 py-4 text-lg leading-normal font-medium transition-colors md:w-auto md:self-start"
       href={href}
     >
       {leftIcon && <Icon iconName={leftIcon} />}
