@@ -2,7 +2,7 @@ import { FaBriefcase } from "react-icons/fa";
 
 export type TExperienceCardProps = {
   /**
-   * The experience card company
+   * The experience card bullet points
    * @requires
    */
   bulletPoints: string[];
@@ -36,10 +36,10 @@ export const ExperienceCard: React.FC<TExperienceCardProps> = ({
   startDate,
 }) => {
   return (
-    <div className="border-aqua-mint bg-midnight-navy hover:border-bright-aqua flex flex-col gap-3 rounded-lg border-l-2 p-5 pl-6 shadow-lg transition-colors duration-300 hover:shadow-xl">
+    <div className="border-aqua-mint bg-midnight-navy hover:border-bright-aqua flex flex-col gap-3 rounded-lg border-l-2 p-5 pl-6 shadow-lg transition-colors duration-300 hover:shadow-2xl">
       <div className="flex items-center gap-3">
         <FaBriefcase className="text-aqua-mint" size={24} />
-        <h3 className="text-2xl leading-normal font-semibold text-white">
+        <h3 className="text-xl leading-normal font-semibold text-white">
           {position}
         </h3>
       </div>
