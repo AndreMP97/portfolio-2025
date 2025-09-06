@@ -7,7 +7,7 @@ import { useSectionInView } from "hooks/useSectionInView";
 // Zustand Store
 import { useLoadingStore } from "stores/loadingStore";
 
-export const useHeroSection = () => {
+export const useHeroCard = () => {
   const { ref, inView } = useSectionInView();
 
   const canAnimate = useLoadingStore((store) => store.canAnimate);
