@@ -103,6 +103,15 @@ export const useLoader = () => {
       document.body.style.right = "";
       document.body.style.overflow = "";
       document.body.style.width = "";
+
+      // If there's a hash in the URL, scroll to it
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
     }
   }, [isLoading]);
 
