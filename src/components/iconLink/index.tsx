@@ -2,13 +2,12 @@ import { Icon, TIconProps } from "components/icon";
 
 export type TIconLinkProps = TIconProps & {
   /**
-   * The icon aria-label
-   * @requires
+   * The icon aria-label.
    */
   ariaLabel: string;
+
   /**
-   * The icon href
-   * @requires
+   * The icon href.
    */
   href: string;
 };

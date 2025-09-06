@@ -48,7 +48,7 @@ export const MobileNavbar: React.FC<TMobileNavbarProps> = ({
                 variants={navbarAnimations.mobileMenuItem}
                 onClick={onClose}
               >
-                <NavLink {...link} />
+                <NavLink id={link.id} label={link.title} />
               </motion.li>
             ))}
           </motion.ul>

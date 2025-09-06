@@ -1,22 +1,22 @@
 export type TLogoLinkProps = {
   /**
-   * The logo aria-label
-   * @requires
+   * The logo aria-label.
    */
   ariaLabel: string;
+
   /**
-   * The button href
-   * @requires
+   * The button href.
    */
   href: string;
+
   /**
-   * The logo label
-   * @requires
+   * The logo label.
    */
   label: string;
+
   /**
-   * The logo additional onClick action
-   * @requires
+   * The logo additional onClick action.
+   * @optional
    */
   onClick?: () => void;
 };

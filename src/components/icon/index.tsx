@@ -4,12 +4,12 @@ import { IconBaseProps } from "react-icons";
 
 export type TIconProps = IconBaseProps & {
   /**
-   * The icon name
-   * @requires
+   * The icon name.
    */
   iconName: TIconName;
+
   /**
-   * The icon size
+   * The icon size.
    * @optional
    * @default 28
    */

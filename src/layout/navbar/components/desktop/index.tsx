@@ -28,7 +28,7 @@ export const DesktopNavbar: React.FC<TDesktopNavbarProps> = ({ navLinks }) => {
     >
       {navLinks.map((link) => (
         <motion.li key={link.id} variants={navbarAnimations.desktopLinkItem}>
-          <NavLink {...link} />
+          <NavLink id={link.id} label={link.title} />
         </motion.li>
       ))}
     </motion.ul>

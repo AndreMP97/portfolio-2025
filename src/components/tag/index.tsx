@@ -1,7 +1,6 @@
 export type TTagProps = {
   /**
-   * The tag description
-   * @requires
+   * The tag description.
    */
   description: string;
 };

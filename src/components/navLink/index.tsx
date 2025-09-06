@@ -1,23 +1,22 @@
 export type TNavLinkProps = {
   /**
-   * The section id
-   * @requires
+   * The section id.
    */
   id: string;
+
   /**
-   * The section id
-   * @requires
+   * The nav link label.
    */
-  title: string;
+  label: string;
 };
 
-export const NavLink: React.FC<TNavLinkProps> = ({ id, title }) => {
+export const NavLink: React.FC<TNavLinkProps> = ({ id, label }) => {
   return (
     <a
       className="hover:text-aqua-mint text-lg leading-normal font-medium text-white transition-colors"
       href={`#${id}`}
     >
-      {title}
+      {label}
     </a>
   );
 };

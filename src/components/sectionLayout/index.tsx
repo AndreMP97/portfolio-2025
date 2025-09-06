@@ -5,17 +5,17 @@ import { useSectionInView } from "hooks/useSectionInView";
 
 export type TSectionLayoutProps = {
   /**
-   * Content to be displayed inside the sectioni
+   * Content to be displayed inside the section.
    */
   children: React.ReactNode;
 
   /**
-   * The section id
+   * The section id.
    */
   id: string;
 
   /**
-   * The section title
+   * The section title.
    * @optional
    */
   title?: string;

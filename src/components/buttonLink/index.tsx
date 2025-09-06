@@ -3,26 +3,29 @@ import { TIconName } from "constants/icons";
 
 export type TButtonLinkProps = {
   /**
-   * The button aria-label
-   * @requires
+   * The button aria-label.
    */
   ariaLabel: string;
+
   /**
-   * The button href
-   * @requires
+   * The button href.
    */
   href: string;
+
   /**
-   * The button label
-   * @requires
+   * The button label.
    */
   label: string;
+
   /**
-   * The button left icon
+   * The button left icon.
+   * @optional
    */
   leftIcon?: TIconName;
+
   /**
-   * The button left icon
+   * The button left icon.
+   * @optional
    */
   rightIcon?: TIconName;
 };
