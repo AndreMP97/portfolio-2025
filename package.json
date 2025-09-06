@@ -8,7 +8,10 @@
     "dev": "rsbuild dev --open",
     "preview": "rsbuild preview",
     "lint": "eslint src/**/*.{ts,tsx}",
-    "lint:fix": "eslint src/**/*.{ts,tsx} --fix"
+    "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
+    "typecheck": "tsc --noEmit",
+    "precommit": "lint-staged",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@fontsource/great-vibes": "^5.2.6",
@@ -35,9 +38,17 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-tailwindcss": "^3.18.2",
     "eslint-plugin-typescript-sort-keys": "^3.3.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "tsc --noEmit",
+      "eslint --fix"
+    ]
   }
 }
