@@ -26,13 +26,8 @@ export type TNavbarProps = {
 };
 
 export const Navbar: React.FC<TNavbarProps> = ({ logoProps, navLinks }) => {
-  const {
-    closeMobileMenu,
-    isMobileMenuOpen,
-    motionProps,
-    toggleMobileMenu,
-    visible,
-  } = useNavbar();
+  const { closeMobileMenu, isMobileMenuOpen, motionProps, toggleMobileMenu } =
+    useNavbar();
 
   return (
     <motion.header
@@ -49,7 +44,7 @@ export const Navbar: React.FC<TNavbarProps> = ({ logoProps, navLinks }) => {
           <LogoLink {...logoProps} onClick={closeMobileMenu} />
         </motion.span>
 
-        <DesktopNavbar navLinks={navLinks} visible={visible} />
+        <DesktopNavbar navLinks={navLinks} />
 
         {/* Mobile Toggle Button */}
         <button

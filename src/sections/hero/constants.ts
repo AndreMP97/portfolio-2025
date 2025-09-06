@@ -1,4 +1,4 @@
-import { ANIMATION_DELAY_BASE, fadeUp } from "constants/animations";
+import { fadeUp } from "constants/animations";
 import { MotionProps, Variants } from "framer-motion";
 
 interface IHeroAnimations {
@@ -20,7 +20,6 @@ export const heroAnimations: IHeroAnimations = {
     hidden: {},
     visible: {
       transition: {
-        delayChildren: ANIMATION_DELAY_BASE,
         staggerChildren: 0.2,
       },
     },

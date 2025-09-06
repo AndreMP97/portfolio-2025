@@ -15,17 +15,10 @@ export type TDesktopNavbarProps = {
    * @requires
    */
   navLinks: TSection[];
-  /**
-   * Whether the component is visible to trigger the animation.
-   */
-  visible: boolean;
 };
 
-export const DesktopNavbar: React.FC<TDesktopNavbarProps> = ({
-  navLinks,
-  visible,
-}) => {
-  const { motionProps } = useDesktopNavbar(visible);
+export const DesktopNavbar: React.FC<TDesktopNavbarProps> = ({ navLinks }) => {
+  const { motionProps } = useDesktopNavbar();
 
   return (
     <motion.ul

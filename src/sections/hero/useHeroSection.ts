@@ -1,14 +1,18 @@
-import { useInView } from "framer-motion";
-import { useMemo, useRef } from "react";
+// React
+import { useMemo } from "react";
+
+// Hooks
+import { useSectionInView } from "hooks/useSectionInView";
+
+// Zustand Store
 import { useLoadingStore } from "stores/loadingStore";
 
 export const useHeroSection = () => {
-  const isLoading = useLoadingStore((store) => store.isLoading);
+  const { ref, inView } = useSectionInView();
 
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { amount: 0.2, once: true });
+  const canAnimate = useLoadingStore((store) => store.canAnimate);
 
-  const visible = useMemo(() => !isLoading && inView, [inView, isLoading]);
+  const visible = useMemo(() => canAnimate && inView, [inView, canAnimate]);
 
   return { ref, visible };
 };

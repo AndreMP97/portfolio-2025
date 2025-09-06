@@ -1,5 +1,5 @@
 import { Variants, MotionProps } from "framer-motion";
-import { ANIMATION_DELAY_BASE, fadeDown, fadeUp } from "constants/animations";
+import { fadeDown, fadeUp } from "constants/animations";
 
 interface INavbarAnimations {
   container: Variants;
@@ -16,7 +16,6 @@ export const navbarAnimations: INavbarAnimations = {
     hidden: {},
     visible: {
       transition: {
-        delayChildren: ANIMATION_DELAY_BASE,
         staggerChildren: 0.2,
       },
     },
@@ -26,7 +25,6 @@ export const navbarAnimations: INavbarAnimations = {
     hidden: {},
     visible: {
       transition: {
-        delayChildren: ANIMATION_DELAY_BASE,
         staggerChildren: 0.15,
       },
     },
