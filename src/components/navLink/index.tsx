@@ -14,7 +14,7 @@ export type TNavLinkProps = {
 export const NavLink: React.FC<TNavLinkProps> = ({ id, title }) => {
   return (
     <a
-      className="text-lg leading-normal font-medium text-white transition-colors hover:text-aqua-mint"
+      className="hover:text-aqua-mint text-lg leading-normal font-medium text-white transition-colors"
       href={`#${id}`}
     >
       {title}

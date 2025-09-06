@@ -3,7 +3,14 @@ import { letterVariants, panelVariants } from "./constants";
 import { useLoader } from "./useLoader";
 
 export const Loader: React.FC = () => {
-  const { hideLetters, hideLoader, slidePanels } = useLoader();
+  const {
+    hideLetters,
+    hideLoader,
+    leftPanelClass,
+    leftPanelAnimate,
+    rightPanelAnimate,
+    rightPanelClass,
+  } = useLoader();
 
   if (hideLoader) return null;
 
@@ -11,16 +18,16 @@ export const Loader: React.FC = () => {
     <div className="pointer-events-none fixed inset-0 z-[9999] flex">
       {/* Left Panel */}
       <motion.div
-        className="bg-midnight-navy absolute top-0 left-0 h-full w-1/2"
+        animate={leftPanelAnimate}
+        className={leftPanelClass}
         variants={panelVariants}
-        animate={slidePanels ? "slideLeft" : "hiddenLeft"}
       />
 
       {/* Right Panel */}
       <motion.div
-        className="bg-midnight-navy absolute top-0 left-1/2 h-full w-1/2"
+        animate={rightPanelAnimate}
+        className={rightPanelClass}
         variants={panelVariants}
-        animate={slidePanels ? "slideRight" : "hiddenRight"}
       />
 
       {/* Letters loop animation while loading */}

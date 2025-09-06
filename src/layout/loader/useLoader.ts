@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLoadingStore } from "stores/loadingStore";
 import {
   ANIMATION_FADE_OUT_LETTERS,
   ANIMATION_SLIDE_PANELS,
+  MOBILE_BREAKPOINT,
 } from "./constants";
 
 export const useLoader = () => {
@@ -11,6 +12,57 @@ export const useLoader = () => {
   const [hideLetters, setHideLetters] = useState(false);
   const [hideLoader, setHideLoader] = useState(false);
   const [slidePanels, setSlidePanels] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const leftPanelAnimate = useMemo(
+    () =>
+      slidePanels
+        ? isMobile
+          ? "slideUp"
+          : "slideLeft"
+        : isMobile
+          ? "hiddenUp"
+          : "hiddenLeft",
+    [isMobile, slidePanels],
+  );
+
+  const leftPanelClass = useMemo(
+    () =>
+      isMobile
+        ? "bg-midnight-navy absolute top-0 left-0 w-full h-1/2"
+        : "bg-midnight-navy absolute top-0 left-0 h-full w-1/2",
+    [isMobile],
+  );
+
+  const rightPanelAnimate = useMemo(
+    () =>
+      slidePanels
+        ? isMobile
+          ? "slideDown"
+          : "slideRight"
+        : isMobile
+          ? "hiddenDown"
+          : "hiddenRight",
+    [isMobile, slidePanels],
+  );
+
+  const rightPanelClass = useMemo(
+    () =>
+      isMobile
+        ? "bg-midnight-navy absolute bottom-0 left-0 w-full h-1/2"
+        : "bg-midnight-navy absolute top-0 left-1/2 h-full w-1/2",
+    [isMobile],
+  );
+
+  useEffect(() => {
+    const handleResize = () =>
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // When loading ends, fade out letters, then slide panels
   useEffect(() => {
@@ -36,7 +88,7 @@ export const useLoader = () => {
     }
   }, [slidePanels]);
 
-  // Disable body scroll & scroll to top when loader is active
+  // Disable body scroll and scroll to top when loader is active
   useEffect(() => {
     if (isLoading) {
       document.body.style.position = "fixed";
@@ -57,5 +109,13 @@ export const useLoader = () => {
     }
   }, [isLoading]);
 
-  return { hideLetters, hideLoader, slidePanels };
+  return {
+    hideLetters,
+    hideLoader,
+    isMobile,
+    leftPanelAnimate,
+    leftPanelClass,
+    rightPanelAnimate,
+    rightPanelClass,
+  };
 };
