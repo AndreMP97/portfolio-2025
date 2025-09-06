@@ -1,13 +1,19 @@
+// Framer-motion
+import { motion } from "framer-motion";
+import { sectionAnimations } from "./constants";
+import { useSectionInView } from "hooks/useSectionInView";
+
 export type TSectionLayoutProps = {
   /**
    * Content to be displayed inside the sectioni
    */
   children: React.ReactNode;
+
   /**
    * The section id
-   * @requires
    */
   id: string;
+
   /**
    * The section title
    * @optional
@@ -20,12 +26,19 @@ export const SectionLayout: React.FC<TSectionLayoutProps> = ({
   title,
   children,
 }) => {
+  const { ref, motionProps } = useSectionInView<HTMLHeadingElement>();
+
   return (
     <section className="flex scroll-mt-24 flex-col gap-6" id={id}>
       {title && (
-        <h2 className="text-center text-3xl leading-tight font-bold tracking-tight text-white md:text-left">
+        <motion.h2
+          ref={ref}
+          variants={sectionAnimations.title}
+          {...motionProps}
+          className="text-center text-3xl leading-tight font-bold tracking-tight text-white md:text-left"
+        >
           {title}
-        </h2>
+        </motion.h2>
       )}
       <div className="section-container">{children}</div>
     </section>
