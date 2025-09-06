@@ -1,3 +1,6 @@
+// Assets
+import Photo from "assets/photo.jpg";
+
 // Components
 import { ButtonLink, TButtonLinkProps } from "components/buttonLink";
 
@@ -19,11 +22,6 @@ export type THeroCardProps = {
   description: string;
 
   /**
-   * The hero card photo URL.
-   */
-  photoUrl: string;
-
-  /**
    * The hero card sub title.
    */
   subtitle: string;
@@ -37,7 +35,6 @@ export type THeroCardProps = {
 export const HeroCard: React.FC<THeroCardProps> = ({
   buttons,
   description,
-  photoUrl,
   subtitle,
   title,
 }) => {
@@ -90,7 +87,7 @@ export const HeroCard: React.FC<THeroCardProps> = ({
         {...heroCardInteractions}
         variants={heroCardAnimations.image}
         className="border-aqua-mint order-1 aspect-square h-32 w-32 rounded-full border-2 bg-cover bg-center bg-no-repeat md:order-2 md:h-40 md:w-40 lg:h-48 lg:w-48"
-        src={photoUrl}
+        src={Photo}
         alt="Portrait of André Pacheco"
       />
     </motion.div>
