@@ -1,5 +1,5 @@
+import { TContactCardProps } from "sections/contact/components/contactCard";
 import { urls } from "./urls";
-import { TContactCardProps } from "components/cards/ContactCard";
 
 export const contactProps: TContactCardProps = {
   buttons: [

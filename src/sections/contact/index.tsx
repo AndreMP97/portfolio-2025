@@ -1,5 +1,5 @@
 // Component
-import { ContactCard } from "components/cards/ContactCard";
+import { ContactCard } from "./components/contactCard";
 
 // Constants
 import { contactProps } from "constants/contact";
