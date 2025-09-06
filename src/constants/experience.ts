@@ -1,5 +1,5 @@
 /* eslint-disable sort-keys */
-import { TExperienceCardProps } from "components/cards/ExperienceCard";
+import { TExperienceCardProps } from "sections/experience/components/experienceCard";
 
 export const experienceCards: TExperienceCardProps[] = [
   {

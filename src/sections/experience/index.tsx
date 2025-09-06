@@ -1,5 +1,7 @@
-import { ExperienceCard } from "components/cards/ExperienceCard";
 import { experienceCards } from "constants/experience";
+
+// Components
+import { ExperienceCard } from "./components/experienceCard";
 
 export const ExperienceSection: React.FC = () => {
   return (
