@@ -5,10 +5,10 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 // Components
-import { MobileNavbar } from "./Navbar/MobileNavbar";
-import { DesktopNavbar } from "./Navbar/DesktopNavbar";
 import { Icon } from "components/icon";
 import { LogoLink, TLogoLinkProps } from "components/logoLink";
+import { DesktopNavbar } from "./components/desktop";
+import { MobileNavbar } from "./components/mobile";
 
 // Constants
 import { TSection } from "constants/sections";

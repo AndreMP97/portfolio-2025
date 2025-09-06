@@ -1,7 +1,7 @@
 // Components
 import { Loader } from "layout/loader";
-import { Navbar } from "components/layout/Navbar";
 import { PageLayout } from "layout/pageLayout";
+import { Navbar } from "layout/navbar";
 import { Footer } from "layout/footer";
 
 // Constants

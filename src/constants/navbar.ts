@@ -1,4 +1,4 @@
-import { TNavbarProps } from "components/layout/Navbar";
+import { TNavbarProps } from "layout/navbar";
 import { sections } from "./sections";
 
 export const navbarProps: TNavbarProps = {
