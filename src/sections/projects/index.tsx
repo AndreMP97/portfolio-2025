@@ -1,5 +1,5 @@
 // Components
-import { ProjectCard } from "components/cards/ProjectCard";
+import { ProjectCard } from "./components/projectCard";
 
 // Constants
 import { projects } from "constants/projects";
