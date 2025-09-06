@@ -1,8 +1,13 @@
+// Framer Motion
+import { motion } from "framer-motion";
+
 // Components
 import { NavLink } from "components/navLink";
 
 // Constants
 import { TSection } from "constants/sections";
+import { navbarAnimations } from "layout/navbar/constants";
+import { useDesktopNavbar } from "./useDesktopNavbar";
 
 export type TDesktopNavbarProps = {
   /**
@@ -10,16 +15,29 @@ export type TDesktopNavbarProps = {
    * @requires
    */
   navLinks: TSection[];
+  /**
+   * Whether the component is visible to trigger the animation.
+   */
+  visible: boolean;
 };
 
-export const DesktopNavbar: React.FC<TDesktopNavbarProps> = ({ navLinks }) => {
+export const DesktopNavbar: React.FC<TDesktopNavbarProps> = ({
+  navLinks,
+  visible,
+}) => {
+  const { motionProps } = useDesktopNavbar(visible);
+
   return (
-    <ul className="hidden items-center gap-6 md:flex">
+    <motion.ul
+      {...motionProps}
+      variants={navbarAnimations.desktopLinks}
+      className="hidden items-center gap-6 md:flex"
+    >
       {navLinks.map((link) => (
-        <li key={link.id}>
+        <motion.li key={link.id} variants={navbarAnimations.desktopLinkItem}>
           <NavLink {...link} />
-        </li>
+        </motion.li>
       ))}
-    </ul>
+    </motion.ul>
   );
 };

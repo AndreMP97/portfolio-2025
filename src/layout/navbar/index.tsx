@@ -1,6 +1,3 @@
-// React
-import { useState } from "react";
-
 // Framer-motion
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -12,36 +9,43 @@ import { MobileNavbar } from "./components/mobile";
 
 // Constants
 import { TSection } from "constants/sections";
+import { navbarAnimations } from "./constants";
+
+// Hooks
+import { useNavbar } from "./useNavbar";
 
 export type TNavbarProps = {
   /**
    * The navbar logo props
-   * @requires
    */
   logoProps: TLogoLinkProps;
   /**
    * The navbar links
-   * @requires
    */
   navLinks: TSection[];
 };
 
 export const Navbar: React.FC<TNavbarProps> = ({ logoProps, navLinks }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  const { closeMobileMenu, isMobileMenuOpen, toggleMobileMenu, visible } =
+    useNavbar();
 
   return (
-    <header className="border-b-space-blue bg-navy-blue/70 fixed z-50 flex h-20 w-full items-center justify-center border-b border-solid whitespace-nowrap">
+    <motion.header
+      variants={navbarAnimations.container}
+      initial="hidden"
+      animate={visible ? "visible" : "hidden"}
+      className="border-b-space-blue bg-navy-blue/70 fixed z-50 flex h-20 w-full items-center justify-center border-b border-solid whitespace-nowrap"
+    >
       <nav
         className="container-layout flex h-full flex-1 items-center justify-between backdrop-blur-xs"
         role="navigation"
         aria-label="Main navigation"
       >
-        <LogoLink {...logoProps} onClick={closeMobileMenu} />
+        <motion.span variants={navbarAnimations.logo} className="-rotate-12">
+          <LogoLink {...logoProps} onClick={closeMobileMenu} />
+        </motion.span>
 
-        <DesktopNavbar navLinks={navLinks} />
+        <DesktopNavbar navLinks={navLinks} visible={visible} />
 
         {/* Mobile Toggle Button */}
         <button
@@ -52,9 +56,7 @@ export const Navbar: React.FC<TNavbarProps> = ({ logoProps, navLinks }) => {
           <AnimatePresence mode="wait" initial={false}>
             <motion.span
               key={isMobileMenuOpen ? "close" : "menu"}
-              initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
-              animate={{ opacity: 1, rotate: 0, scale: 1 }}
-              exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+              variants={navbarAnimations.toggleIcon}
               transition={{ duration: 0.2 }}
             >
               {isMobileMenuOpen ? (
@@ -72,6 +74,6 @@ export const Navbar: React.FC<TNavbarProps> = ({ logoProps, navLinks }) => {
         navLinks={navLinks}
         onClose={closeMobileMenu}
       />
-    </header>
+    </motion.header>
   );
 };

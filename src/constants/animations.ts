@@ -1,8 +1,19 @@
 import { Variants } from "framer-motion";
 
-export const fadeUp = (duration = 0.6): Variants => ({
-  hidden: { opacity: 0, y: 20 },
+/**
+ * Fade upward animation
+ */
+export const fadeUp = (duration = 0.6, distance = 20): Variants => ({
+  hidden: { opacity: 0, y: distance },
   visible: { opacity: 1, transition: { duration }, y: 0 },
 });
 
-export const ANIMATION_DELAY_BASE = 0.5; // In seconds
+/**
+ * Fade downward animation
+ */
+export const fadeDown = (duration = 0.6, distance = 20): Variants => ({
+  hidden: { opacity: 0, y: -distance },
+  visible: { opacity: 1, transition: { duration }, y: 0 },
+});
+
+export const ANIMATION_DELAY_BASE = 0.6; // In seconds
