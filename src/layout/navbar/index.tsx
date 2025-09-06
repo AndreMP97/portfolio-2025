@@ -26,14 +26,18 @@ export type TNavbarProps = {
 };
 
 export const Navbar: React.FC<TNavbarProps> = ({ logoProps, navLinks }) => {
-  const { closeMobileMenu, isMobileMenuOpen, toggleMobileMenu, visible } =
-    useNavbar();
+  const {
+    closeMobileMenu,
+    isMobileMenuOpen,
+    motionProps,
+    toggleMobileMenu,
+    visible,
+  } = useNavbar();
 
   return (
     <motion.header
+      {...motionProps}
       variants={navbarAnimations.container}
-      initial="hidden"
-      animate={visible ? "visible" : "hidden"}
       className="border-b-space-blue bg-navy-blue/70 fixed z-50 flex h-20 w-full items-center justify-center border-b border-solid whitespace-nowrap"
     >
       <nav
