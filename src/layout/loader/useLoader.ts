@@ -8,13 +8,13 @@ import {
 } from "./constants";
 
 // Provider context
-import { useMobileContext } from "providers/mobileProvider";
+import { useBreakpointContext } from "providers/breakpointProvider";
 
 // Zustand Store
 import { useLoadingStore } from "stores/loadingStore";
 
 export const useLoader = () => {
-  const { isMobile } = useMobileContext();
+  const { isTablet } = useBreakpointContext();
   const isLoading = useLoadingStore((store) => store.isLoading);
 
   const [hideLetters, setHideLetters] = useState(false);
@@ -24,41 +24,41 @@ export const useLoader = () => {
   const leftPanelAnimate = useMemo(
     () =>
       slidePanels
-        ? isMobile
+        ? isTablet
           ? "slideUp"
           : "slideLeft"
-        : isMobile
+        : isTablet
           ? "hiddenUp"
           : "hiddenLeft",
-    [isMobile, slidePanels],
+    [isTablet, slidePanels],
   );
 
   const leftPanelClass = useMemo(
     () =>
-      isMobile
+      isTablet
         ? "bg-midnight-navy absolute top-0 left-0 w-full h-1/2"
         : "bg-midnight-navy absolute top-0 left-0 h-full w-1/2",
-    [isMobile],
+    [isTablet],
   );
 
   const rightPanelAnimate = useMemo(
     () =>
       slidePanels
-        ? isMobile
+        ? isTablet
           ? "slideDown"
           : "slideRight"
-        : isMobile
+        : isTablet
           ? "hiddenDown"
           : "hiddenRight",
-    [isMobile, slidePanels],
+    [isTablet, slidePanels],
   );
 
   const rightPanelClass = useMemo(
     () =>
-      isMobile
+      isTablet
         ? "bg-midnight-navy absolute bottom-0 left-0 w-full h-1/2"
         : "bg-midnight-navy absolute top-0 left-1/2 h-full w-1/2",
-    [isMobile],
+    [isTablet],
   );
 
   // When loading ends, fade out letters, then slide panels

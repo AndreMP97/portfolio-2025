@@ -9,7 +9,9 @@ import { footerProps } from "constants/footer";
 import { navbarProps } from "constants/navbar";
 import { useEffect } from "react";
 import { useLoadingStore } from "stores/loadingStore";
-import { MobileProvider } from "providers/mobileProvider";
+
+// Providers
+import { BreakpointProvider } from "providers/breakpointProvider";
 
 const App = () => {
   const setIsLoading = useLoadingStore((store) => store.setIsLoading);
@@ -20,14 +22,14 @@ const App = () => {
   }, [setIsLoading]);
 
   return (
-    <MobileProvider>
+    <BreakpointProvider>
       <div className="bg-navy-blue font-space-grotesk relative flex min-h-screen flex-col overflow-x-hidden">
         <Loader />
         <Navbar {...navbarProps} />
         <PageLayout />
         <Footer {...footerProps} />
       </div>
-    </MobileProvider>
+    </BreakpointProvider>
   );
 };
 

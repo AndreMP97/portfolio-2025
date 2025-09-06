@@ -13,7 +13,7 @@ export const experienceCardAnimations: IExperienceCardAnimations = {
   bulletPoint: fadeUp(0.4),
   company: fadeUp(),
   container: {
-    hidden: { opacity: 0, x: "100%" },
+    hidden: { opacity: 0, x: 250 },
     visible: {
       opacity: 1,
       transition: {
