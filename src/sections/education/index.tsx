@@ -1,5 +1,5 @@
-import { EducationCard } from "components/cards/EducationCard";
-import { educationCardType } from "components/cards/EducationCard.types";
+import { EducationCard } from "./components/educationCard";
+import { educationCardType } from "./components/educationCard/types";
 
 export const EducationSection: React.FC = () => {
   return (

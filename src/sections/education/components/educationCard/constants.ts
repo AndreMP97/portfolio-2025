@@ -1,33 +1,33 @@
 import { Variants } from "framer-motion";
 import { fadeUp } from "constants/animations";
 
-export interface IExperienceCardAnimations {
+export interface IEducationCardAnimations {
   bulletPoint: Variants;
-  company: Variants;
+  bulletPointTitle: Variants;
   container: Variants;
   content: Variants;
-  position: Variants;
+  description: Variants;
+  place: Variants;
+  title: Variants;
 }
 
-export const experienceCardAnimations: IExperienceCardAnimations = {
+export const educationCardAnimations: IEducationCardAnimations = {
   bulletPoint: fadeUp(0.4),
-  company: fadeUp(),
+  bulletPointTitle: fadeUp(),
   container: {
-    hidden: { opacity: 0, x: 200 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut",
-        staggerChildren: 0.2,
-        when: "beforeChildren",
+        staggerChildren: 0.15,
       },
-      x: 0,
     },
   },
   content: {
     hidden: {},
     visible: { transition: { staggerChildren: 0.2 } },
   },
-  position: fadeUp(),
+  description: fadeUp(),
+  place: fadeUp(),
+  title: fadeUp(),
 };

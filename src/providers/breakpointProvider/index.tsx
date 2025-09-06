@@ -9,7 +9,9 @@ export type TBreakpointContext = {
   isTablet: boolean;
 };
 
-const BreakpointContext = createContext<TBreakpointContext | undefined>(undefined);
+const BreakpointContext = createContext<TBreakpointContext | undefined>(
+  undefined,
+);
 
 export const BreakpointProvider = ({ children }: { children: ReactNode }) => {
   const { isMobile, isTablet } = useBreakpoint();
