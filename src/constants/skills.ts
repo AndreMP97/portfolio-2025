@@ -1,4 +1,4 @@
-import { TSkillCardProps } from "components/cards/SkillCard";
+import { TSkillCardProps } from "sections/skills/components/skillCard";
 
 export const skills: TSkillCardProps[] = [
   {

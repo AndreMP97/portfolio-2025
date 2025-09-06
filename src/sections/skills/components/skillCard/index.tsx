@@ -7,12 +7,10 @@ import { TIconName } from "constants/icons";
 export type TSkillCardProps = {
   /**
    * The skill card description
-   * @requires
    */
   description: string;
   /**
    * The skill card icon
-   * @requires
    */
   iconName: TIconName;
 };

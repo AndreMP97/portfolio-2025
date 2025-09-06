@@ -1,12 +1,31 @@
-import { SkillCard } from "components/cards/SkillCard";
+// Framer-motion
+import { motion } from "framer-motion";
+
+// Components
+import { SkillCard } from "./components/skillCard";
+
+// Constants
 import { skills } from "constants/skills";
+import { skillsAnimations } from "./constants";
+
+// Hooks
+import { useSectionInView } from "hooks/useSectionInView";
 
 export const SkillsSection: React.FC = () => {
+  const { ref, motionProps } = useSectionInView();
+
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
+    <motion.div
+      ref={ref}
+      variants={skillsAnimations.container}
+      {...motionProps}
+      className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4"
+    >
       {skills.map((skill) => (
-        <SkillCard {...skill} />
+        <motion.div key={skill.description} variants={skillsAnimations.card}>
+          <SkillCard {...skill} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
