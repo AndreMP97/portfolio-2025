@@ -23,9 +23,11 @@
     "baseUrl": "src",
     "paths": {
       "@assets": ["assets"],
-      "@constants": ["constants"],
       "@components": ["components"],
+      "@constants": ["constants"],
+      "@hooks": ["hooks"],
       "@layout": ["layout"],
+      "@providers": ["providers"],
       "@sections": ["sections"],
       "@stores": ["stores"]
     }
