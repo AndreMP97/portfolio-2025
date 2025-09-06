@@ -11,7 +11,7 @@
     "module": "ESNext",
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
 
     /* type checking */
@@ -29,5 +29,6 @@
       "@sections": ["sections"]
     }
   },
-  "include": ["src"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "build"]
 }

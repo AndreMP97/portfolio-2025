@@ -9,7 +9,7 @@
     "preview": "rsbuild preview",
     "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
     "precommit": "lint-staged",
     "prepare": "husky install"
   },
@@ -47,7 +47,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "tsc --noEmit",
+      "sh -c 'pnpm typecheck'",
       "eslint --fix"
     ]
   }
