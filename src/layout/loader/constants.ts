@@ -30,4 +30,3 @@ export const letterVariants: Variants = {
 
 export const ANIMATION_FADE_OUT_LETTERS = 300;
 export const ANIMATION_SLIDE_PANELS = 1000;
-export const MOBILE_BREAKPOINT = 768;

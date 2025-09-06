@@ -1,18 +1,25 @@
+// React
 import { useEffect, useMemo, useState } from "react";
-import { useLoadingStore } from "stores/loadingStore";
+
+// Constants
 import {
   ANIMATION_FADE_OUT_LETTERS,
   ANIMATION_SLIDE_PANELS,
-  MOBILE_BREAKPOINT,
 } from "./constants";
 
+// Provider context
+import { useMobileContext } from "providers/mobileProvider";
+
+// Zustand Store
+import { useLoadingStore } from "stores/loadingStore";
+
 export const useLoader = () => {
+  const { isMobile } = useMobileContext();
   const isLoading = useLoadingStore((store) => store.isLoading);
 
   const [hideLetters, setHideLetters] = useState(false);
   const [hideLoader, setHideLoader] = useState(false);
   const [slidePanels, setSlidePanels] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   const leftPanelAnimate = useMemo(
     () =>
@@ -53,16 +60,6 @@ export const useLoader = () => {
         : "bg-midnight-navy absolute top-0 left-1/2 h-full w-1/2",
     [isMobile],
   );
-
-  useEffect(() => {
-    const handleResize = () =>
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   // When loading ends, fade out letters, then slide panels
   useEffect(() => {
@@ -112,7 +109,6 @@ export const useLoader = () => {
   return {
     hideLetters,
     hideLoader,
-    isMobile,
     leftPanelAnimate,
     leftPanelClass,
     rightPanelAnimate,
