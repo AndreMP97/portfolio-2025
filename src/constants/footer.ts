@@ -1,4 +1,4 @@
-import { TFooterProps } from "components/layout/Footer";
+import { TFooterProps } from "layout/footer";
 import { urls } from "./urls";
 
 export const footerProps: TFooterProps = {

@@ -25,8 +25,9 @@
       "@assets": ["assets"],
       "@constants": ["constants"],
       "@components": ["components"],
-      "@layouts": ["layouts"],
-      "@sections": ["sections"]
+      "@layout": ["layout"],
+      "@sections": ["sections"],
+      "@stores": ["stores"]
     }
   },
   "include": ["src/**/*"],

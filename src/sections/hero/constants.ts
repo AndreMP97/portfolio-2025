@@ -1,4 +1,4 @@
-import { ANIMATION_DELAY_BASE } from "constants/animation";
+import { ANIMATION_DELAY_BASE, fadeUp } from "constants/animations";
 import { MotionProps, Variants } from "framer-motion";
 
 interface IHeroAnimations {
@@ -10,11 +10,6 @@ interface IHeroAnimations {
   button: Variants;
   image: Variants;
 }
-
-const fadeUp = (duration = 0.6): Variants => ({
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, transition: { duration }, y: 0 },
-});
 
 export const heroAnimations: IHeroAnimations = {
   button: {

@@ -1,13 +1,13 @@
 // Components
+import { Loader } from "layout/loader";
 import { Navbar } from "components/layout/Navbar";
 import { PageLayout } from "components/layout/PageLayout";
-import { Footer } from "components/layout/Footer";
+import { Footer } from "layout/footer";
 
 // Constants
 import { footerProps } from "constants/footer";
 import { navbarProps } from "constants/navbar";
 import { useEffect } from "react";
-import { Loader } from "components/loader";
 import { useLoadingStore } from "stores/loadingStore";
 
 const App = () => {
