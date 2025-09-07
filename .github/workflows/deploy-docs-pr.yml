@@ -37,7 +37,7 @@ jobs:
 
       # 7. Create pull request for docs update
       - name: Create PR for docs
-        uses: peter-evans/create-pull-request@d1f7bfa7b8cda3f9f0f1f8260c1f1a2e5c6c9b6a
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.PAT_TOKEN }}
           commit-message: "Update /docs folder [skip ci]"
