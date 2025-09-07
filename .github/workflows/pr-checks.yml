@@ -11,23 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout PR branch
       - uses: actions/checkout@v3
 
+      # Setup Node.js
       - uses: actions/setup-node@v3
         with:
           node-version: 20
 
+      # Install pnpm
       - run: npm install -g pnpm
+
+      # Install dependencies
       - run: pnpm install --frozen-lockfile
 
-      # Build your project
-      - run: rsbuild build
+      # Build project with rsbuild
+      - run: pnpm exec rsbuild build
 
-      # Optional tests & lint
+      # Optional: run tests and lint
       - run: pnpm test
       - run: pnpm lint
 
-      # Save dist/ as artifact for deploy workflow
+      # Upload dist/ as artifact for deploy workflow
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:

@@ -1,4 +1,4 @@
-name: Deploy Docs on Main
+name: Deploy Docs
 
 on:
   push:
@@ -10,24 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout main
+      # Checkout main branch
       - uses: actions/checkout@v3
 
-      # Setup Node.js & pnpm
+      # Setup Node.js
       - uses: actions/setup-node@v3
         with:
           node-version: 20
+
+      # Install pnpm
       - run: npm install -g pnpm
+
+      # Install dependencies
       - run: pnpm install --frozen-lockfile
 
-      # Download the latest PR artifact (optional)
+      # Download latest PR artifact
       - name: Download latest docs artifact
         uses: actions/download-artifact@v3
         with:
           name: docs-build
           path: dist
 
-      # Replace /docs with build output
+      # Replace /docs with the build
       - run: |
           rm -rf docs
           mv dist docs
