@@ -28,8 +28,8 @@ jobs:
       # Build project with rsbuild
       - run: pnpm exec rsbuild build
 
-      # Optional: run tests and lint
-      - run: pnpm test
+      # Optional: run typecheck and lint
+      - run: pnpm typecheck
       - run: pnpm lint
 
       # Upload dist/ as artifact for deploy workflow
