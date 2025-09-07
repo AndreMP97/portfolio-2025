@@ -4,9 +4,9 @@ import ManagmentPlatform from "assets/PESTA.png";
 import WeatherProject from "assets/weatherProject.png";
 
 // Types
-import { TProjectCardProps } from "sections/projects/components/projectCard";
+import { TProjectCardProps } from "components/projectCard";
 
-export const projects: TProjectCardProps[] = [
+export const projectsData: TProjectCardProps[] = [
   {
     image: WeatherProject,
     title: "Weather Forecast",

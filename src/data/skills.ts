@@ -1,6 +1,6 @@
-import { TSkillCardProps } from "sections/skills/components/skillCard";
+import { TSkillCardProps } from "components/skillCard";
 
-export const skills: TSkillCardProps[] = [
+export const skillsData: TSkillCardProps[] = [
   {
     description: "HTML, CSS, TypeScript",
     iconName: "FaCode",

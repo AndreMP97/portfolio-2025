@@ -1,9 +1,9 @@
 // Component
-import { ContactCard } from "./components/contactCard";
+import { ContactCard } from "components/contactCard";
 
-// Constants
-import { contactProps } from "constants/contact";
+// Data
+import { contactData } from "data/contact";
 
 export const ContactSection: React.FC = () => {
-  return <ContactCard {...contactProps} />;
+  return <ContactCard {...contactData} />;
 };

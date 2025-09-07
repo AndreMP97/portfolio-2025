@@ -1,12 +1,13 @@
-import { experienceCards } from "constants/experience";
+// Component
+import { ExperienceCard } from "components/experienceCard";
 
-// Components
-import { ExperienceCard } from "./components/experienceCard";
+// Data
+import { experienceData } from "data/experience";
 
 export const ExperienceSection: React.FC = () => {
   return (
     <div className="flex flex-col gap-8">
-      {experienceCards.map((props, index) => (
+      {experienceData.map((props, index) => (
         <ExperienceCard key={`experience-card-${index}`} {...props} />
       ))}
     </div>

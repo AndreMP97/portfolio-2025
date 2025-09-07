@@ -1,24 +1,15 @@
-import { EducationCard } from "./components/educationCard";
-import { educationCardType } from "./components/educationCard/types";
+// Component
+import { EducationCard } from "components/educationCard";
+
+// Data
+import { educationData } from "data/education";
 
 export const EducationSection: React.FC = () => {
   return (
     <div className="space-y-8">
-      <EducationCard
-        title="Bachelor of Science in Computer Science"
-        place="State University"
-        startDate="2014"
-        endDate="2018"
-        description="Major concentration in Web Development and Software Engineering. Graduated with Honors (Cum Laude)."
-        bulletPointsTitle="Key Courses:"
-        bulletPoints={[
-          "Data Structures",
-          "Algorithms",
-          "Web Design",
-          "Database Management",
-        ]}
-        type={educationCardType.university}
-      />
+      {educationData.map((card) => (
+        <EducationCard key={card.title} {...card} />
+      ))}
     </div>
   );
 };

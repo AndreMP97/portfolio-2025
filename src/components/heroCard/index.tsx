@@ -4,10 +4,16 @@ import Photo from "assets/photo.jpg";
 // Components
 import { ButtonLink, TButtonLinkProps } from "components/buttonLink";
 
+// Constants
+import { heroCardAnimations } from "./constants";
+import { hoverInteraction } from "utils/animations";
+
 // Framer-motion
 import { motion } from "framer-motion";
+
+// Hooks
 import { useHeroCard } from "./useHeroCard";
-import { heroCardAnimations, heroCardInteractions } from "./constants";
+import { baseConfig } from "config/base";
 
 export type THeroCardProps = {
   /**
@@ -75,7 +81,7 @@ export const HeroCard: React.FC<THeroCardProps> = ({
             <motion.div
               key={button.label}
               variants={heroCardAnimations.button}
-              {...heroCardInteractions}
+              {...hoverInteraction}
               className="self-center md:self-start"
             >
               <ButtonLink {...button} />
@@ -84,11 +90,14 @@ export const HeroCard: React.FC<THeroCardProps> = ({
       </motion.div>
 
       <motion.img
-        {...heroCardInteractions}
+        {...hoverInteraction}
         variants={heroCardAnimations.image}
-        className="border-aqua-mint order-1 aspect-square h-32 w-32 rounded-full border-2 bg-cover bg-center bg-no-repeat md:order-2 md:h-40 md:w-40 lg:h-48 lg:w-48"
+        className="border-aqua-mint order-1 aspect-square h-32 w-32 rounded-full border-2 bg-cover bg-center bg-no-repeat hover:cursor-pointer md:order-2 md:h-40 md:w-40 lg:h-48 lg:w-48"
         src={Photo}
         alt="Portrait of André Pacheco"
+        onClick={() =>
+          window.open(baseConfig.linkedin, "_blank", "noopener noreferrer")
+        }
       />
     </motion.div>
   );

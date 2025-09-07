@@ -6,6 +6,7 @@ import { Icon } from "components/icon";
 
 // Constants
 import { experienceCardAnimations } from "./constants";
+import { hoverInteraction } from "utils/animations";
 
 // Hooks
 import { useSectionInView } from "hooks/useSectionInView";
@@ -63,6 +64,7 @@ export const ExperienceCard: React.FC<TExperienceCardProps> = ({
       ref={ref}
       variants={experienceCardAnimations.container}
       {...motionProps}
+      {...hoverInteraction}
       href={href}
       target="_blank"
       aria-label={ariaLabel}

@@ -1,5 +1,8 @@
-import { Variants, MotionProps } from "framer-motion";
-import { fadeDown, fadeUp } from "constants/animations";
+// Framer-motion
+import { Variants } from "framer-motion";
+
+// Utils
+import { fadeDown, fadeUp } from "utils/animations";
 
 interface INavbarAnimations {
   container: Variants;
@@ -41,9 +44,4 @@ export const navbarAnimations: INavbarAnimations = {
     exit: { opacity: 0, rotate: 90, scale: 0.8 },
     initial: { opacity: 0, rotate: -90, scale: 0.8 },
   },
-};
-
-export const navbarInteractions: MotionProps = {
-  whileHover: { scale: 1.02 },
-  whileTap: { scale: 0.98 },
 };

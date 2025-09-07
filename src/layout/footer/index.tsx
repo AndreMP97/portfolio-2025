@@ -1,20 +1,20 @@
-import { IconLink, TIconLinkProps } from "components/iconLink";
-import { motion } from "framer-motion";
-import { useFooter } from "./useFooter";
+// Components
+import { IconLink } from "components/iconLink";
+
+// Config
+import { footerConfig } from "config/footer";
+
+// Constants
 import { footerAnimations, footerInteractions } from "./constants";
 
-export type TFooterProps = {
-  /**
-   * The icons to display in the footer
-   */
-  icons?: TIconLinkProps[];
-  /**
-   * The name to display in the footer
-   */
-  name: string;
-};
+// Framer-motion
+import { motion } from "framer-motion";
 
-export const Footer: React.FC<TFooterProps> = ({ icons = [], name }) => {
+// Hooks
+import { useFooter } from "./useFooter";
+
+export const Footer: React.FC = () => {
+  const { icons, name } = footerConfig;
   const { ref, motionProps, currentYear } = useFooter();
 
   return (
@@ -26,7 +26,7 @@ export const Footer: React.FC<TFooterProps> = ({ icons = [], name }) => {
       {...motionProps}
     >
       <div className="container-layout flex flex-col items-center gap-8 py-12 text-center">
-        {icons.length > 0 && (
+        {!!icons && icons.length > 0 && (
           <motion.ul
             variants={footerAnimations.iconsContainer}
             className="flex gap-4"

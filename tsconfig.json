@@ -24,12 +24,14 @@
     "paths": {
       "@assets": ["assets"],
       "@components": ["components"],
-      "@constants": ["constants"],
+      "@config": ["config"],
+      "@data": ["data"],
       "@hooks": ["hooks"],
       "@layout": ["layout"],
       "@providers": ["providers"],
       "@sections": ["sections"],
-      "@stores": ["stores"]
+      "@stores": ["stores"],
+      "@utils": ["utils"]
     }
   },
   "include": ["src/**/*"],

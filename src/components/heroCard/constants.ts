@@ -1,7 +1,10 @@
-import { fadeUp } from "constants/animations";
-import { MotionProps, Variants } from "framer-motion";
+// Constants
+import { fadeUp } from "utils/animations";
 
-interface IHeroAnimations {
+// Framer-motion
+import { Variants } from "framer-motion";
+
+interface IHeroCardAnimations {
   container: Variants;
   textContainer: Variants;
   title: Variants;
@@ -11,7 +14,7 @@ interface IHeroAnimations {
   image: Variants;
 }
 
-export const heroAnimations: IHeroAnimations = {
+export const heroCardAnimations: IHeroCardAnimations = {
   button: {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
@@ -43,9 +46,4 @@ export const heroAnimations: IHeroAnimations = {
     },
   },
   title: fadeUp(),
-};
-
-export const heroInteractions: MotionProps = {
-  whileHover: { scale: 1.05 },
-  whileTap: { scale: 0.95 },
 };

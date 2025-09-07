@@ -88,21 +88,14 @@ export const useLoader = () => {
   // Disable body scroll and scroll to top when loader is active
   useEffect(() => {
     if (isLoading) {
-      document.body.style.position = "fixed";
-      document.body.style.top = "0";
-      document.body.style.left = "0";
-      document.body.style.right = "0";
       document.body.style.overflow = "hidden";
-      document.body.style.width = "100%";
 
       window.scrollTo(0, 0);
     } else {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.overflow = "";
-      document.body.style.width = "";
+      setTimeout(
+        () => (document.body.style.overflow = ""),
+        ANIMATION_SLIDE_PANELS,
+      );
 
       // If there's a hash in the URL, scroll to it
       const hash = window.location.hash;

@@ -4,9 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 // Components
 import { NavLink } from "components/navLink";
 
+// Config
+import { TSection } from "config/sections";
+
 // Constants
-import { TSection } from "constants/sections";
 import { navbarAnimations } from "layout/navbar/constants";
+import { hoverInteraction } from "utils/animations";
 
 // Hooks
 import { useMobileNavbar } from "./useMobileNavbar";
@@ -16,10 +19,12 @@ export type TMobileNavbarProps = {
    * Whether the mobile navbar is open
    */
   isOpen: boolean;
+
   /**
    * The navbar links
    */
   navLinks: TSection[];
+
   /**
    * Callback to close the navbar
    */
@@ -46,6 +51,7 @@ export const MobileNavbar: React.FC<TMobileNavbarProps> = ({
               <motion.li
                 key={link.id}
                 variants={navbarAnimations.mobileMenuItem}
+                {...hoverInteraction}
                 onClick={onClose}
               >
                 <NavLink id={link.id} label={link.title} />

@@ -9,7 +9,7 @@ import { ProjectsSection } from "./projects";
 import { SkillsSection } from "./skills";
 
 // Types
-import { TSectionKeys } from "constants/sections";
+import { TSectionKeys } from "config/sections";
 
 const sectionComponents: Record<TSectionKeys, React.FC> = {
   hero: HeroSection,

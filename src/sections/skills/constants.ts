@@ -1,5 +1,8 @@
+// Constants
+import { fadeUp } from "utils/animations";
+
+// Framer-motion
 import { Variants } from "framer-motion";
-import { fadeUp } from "constants/animations";
 
 interface ISkillsAnimations {
   container: Variants;

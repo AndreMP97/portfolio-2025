@@ -1,5 +1,5 @@
 import { Icon } from "components/icon";
-import { TIconName } from "constants/icons";
+import { TIconName } from "utils/icons";
 
 export type TButtonLinkProps = {
   /**

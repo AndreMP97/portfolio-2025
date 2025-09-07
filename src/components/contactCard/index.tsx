@@ -3,10 +3,13 @@ import { motion } from "framer-motion";
 
 // Components
 import { ButtonLink, TButtonLinkProps } from "components/buttonLink";
-import { useSectionInView } from "hooks/useSectionInView";
 
 // Constants
 import { contactCardAnimations } from "./constants";
+import { hoverInteraction } from "utils/animations";
+
+// Hooks
+import { useSectionInView } from "hooks/useSectionInView";
 
 export type TContactCardProps = {
   /**
@@ -63,7 +66,11 @@ export const ContactCard: React.FC<TContactCardProps> = ({
             className="flex w-full flex-col gap-6 md:flex-row md:items-center md:justify-center md:gap-8"
           >
             {buttons.map((button, index) => (
-              <motion.div key={index} variants={contactCardAnimations.button}>
+              <motion.div
+                key={index}
+                variants={contactCardAnimations.button}
+                {...hoverInteraction}
+              >
                 <ButtonLink {...button} />
               </motion.div>
             ))}

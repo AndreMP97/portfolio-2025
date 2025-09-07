@@ -1,17 +1,20 @@
-import { TContactCardProps } from "sections/contact/components/contactCard";
-import { urls } from "./urls";
+// Config
+import { baseConfig } from "config/base";
 
-export const contactProps: TContactCardProps = {
+// Types
+import { TContactCardProps } from "components/contactCard";
+
+export const contactData: TContactCardProps = {
   buttons: [
     {
       ariaLabel: "LinkedIn Profile",
-      href: urls.linkedin,
+      href: baseConfig.linkedin,
       label: "LinkedIn Profile",
       leftIcon: "FaLinkedin",
     },
     {
       ariaLabel: "Personal email",
-      href: urls.email,
+      href: baseConfig.email,
       label: "Email",
       leftIcon: "FaEnvelope",
     },

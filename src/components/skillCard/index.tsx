@@ -2,13 +2,14 @@
 import { Icon } from "components/icon";
 
 // Types
-import { TIconName } from "constants/icons";
+import { TIconName } from "utils/icons";
 
 export type TSkillCardProps = {
   /**
    * The skill card description
    */
   description: string;
+
   /**
    * The skill card icon
    */

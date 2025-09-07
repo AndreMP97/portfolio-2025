@@ -3,36 +3,29 @@ import { AnimatePresence, motion } from "framer-motion";
 
 // Components
 import { Icon } from "components/icon";
-import { LogoLink, TLogoLinkProps } from "components/logoLink";
+import { LogoLink } from "components/logoLink";
 import { DesktopNavbar } from "./components/desktop";
 import { MobileNavbar } from "./components/mobile";
 
+// Config
+import { navbarConfig } from "config/navbar";
+
 // Constants
-import { TSection } from "constants/sections";
 import { navbarAnimations } from "./constants";
+import { hoverInteraction } from "utils/animations";
 
 // Hooks
 import { useNavbar } from "./useNavbar";
 
-export type TNavbarProps = {
-  /**
-   * The navbar logo props
-   */
-  logoProps: TLogoLinkProps;
-  /**
-   * The navbar links
-   */
-  navLinks: TSection[];
-};
-
-export const Navbar: React.FC<TNavbarProps> = ({ logoProps, navLinks }) => {
+export const Navbar: React.FC = () => {
+  const { logoProps, navLinks } = navbarConfig;
   const { closeMobileMenu, isMobileMenuOpen, motionProps, toggleMobileMenu } =
     useNavbar();
 
   return (
     <motion.header
-      {...motionProps}
       variants={navbarAnimations.container}
+      {...motionProps}
       className="border-b-space-blue bg-navy-blue/70 fixed z-50 flex h-20 w-full items-center justify-center border-b border-solid whitespace-nowrap"
     >
       <nav
@@ -40,7 +33,11 @@ export const Navbar: React.FC<TNavbarProps> = ({ logoProps, navLinks }) => {
         role="navigation"
         aria-label="Main navigation"
       >
-        <motion.span variants={navbarAnimations.logo} className="-rotate-12">
+        <motion.span
+          variants={navbarAnimations.logo}
+          {...hoverInteraction}
+          className="-rotate-12"
+        >
           <LogoLink {...logoProps} onClick={closeMobileMenu} />
         </motion.span>
 

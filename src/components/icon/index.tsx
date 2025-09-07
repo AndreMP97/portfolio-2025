@@ -1,6 +1,9 @@
-import { iconMap, TIconName } from "constants/icons";
+// React
 import { useMemo } from "react";
 import { IconBaseProps } from "react-icons";
+
+// Utils
+import { iconMap, TIconName } from "utils/icons";
 
 export type TIconProps = IconBaseProps & {
   /**

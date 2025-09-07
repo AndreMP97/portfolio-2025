@@ -1,0 +1,48 @@
+/* eslint-disable sort-keys */
+
+// Types
+import { TExperienceCardProps } from "components/experienceCard";
+
+export const experienceData: TExperienceCardProps[] = [
+  {
+    ariaLabel: "ITSector website",
+    href: "https://www.itsector.com/en/",
+    position: "Front-end Developer",
+    company: "ITSector",
+    startDate: "Jun 2024",
+    endDate: "Present",
+    bulletPoints: [
+      "Contributed to a project encompassing a design system, web app, and mobile app",
+      "Developed and maintained the design system, including code reviews and workflow management",
+      "Built features for the web app using React.JS",
+      "Implemented functionality for the mobile app using React Native",
+      "Leveraged cross-platform skills in React.JS and React Native, providing management with greater flexibility in resource allocation",
+    ],
+  },
+  {
+    ariaLabel: "CustoJusto website",
+    href: "https://www.custojusto.pt",
+    position: "Junior Front-end Developer",
+    company: "CustoJusto",
+    startDate: "Dec 2023",
+    endDate: "Jun 2024",
+    bulletPoints: [
+      "Migrated main platform to Next.js to improve performance and maintainability",
+      "Developed optimization features to enhance platform speed and user experience",
+      "Introduced Tailwind CSS for a modern, scalable redesign",
+    ],
+  },
+  {
+    ariaLabel: "CustoJusto website",
+    href: "https://www.custojusto.pt",
+    position: "Intern Front-end Developer",
+    company: "CustoJusto",
+    startDate: "Mar 2023",
+    endDate: "Dec 2023",
+    bulletPoints: [
+      "Designed and built digital and electronic systems through hands-on coursework",
+      "Applied network, automation, and computational skills in real-world projects",
+      "Completed a full-stack final degree project proposed and guided by the institution",
+    ],
+  },
+];

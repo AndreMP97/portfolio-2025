@@ -1,9 +1,9 @@
 // Components
-import { HeroCard } from "./components/heroCard";
+import { HeroCard } from "components/heroCard";
 
-// Constants:
-import { hero } from "constants/hero";
+// Data
+import { heroData } from "data/hero";
 
 export const HeroSection: React.FC = () => {
-  return <HeroCard {...hero} />;
+  return <HeroCard {...heroData} />;
 };

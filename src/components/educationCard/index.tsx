@@ -1,8 +1,17 @@
-import { motion } from "framer-motion";
+// Components
 import { Icon } from "components/icon";
-import { useSectionInView } from "hooks/useSectionInView";
-import { educationCardType, TEducationCardType } from "./types";
+
+// Constants
 import { educationCardAnimations } from "./constants";
+
+// Framer-motion
+import { motion } from "framer-motion";
+
+// Hooks
+import { useSectionInView } from "hooks/useSectionInView";
+
+// Types
+import { educationCardType, TEducationCardType } from "./types";
 
 export type TEducationCardProps = {
   /**
@@ -105,7 +114,7 @@ export const EducationCard: React.FC<TEducationCardProps> = ({
           >
             {bulletPointsTitle}
           </motion.h4>
-          <ul className="text-lavender-blue marker:text-aqua-mint list-inside list-disc space-y-1 text-base leading-relaxed font-normal">
+          <ul className="text-lavender-blue marker:text-aqua-mint list-inside list-disc space-y-1 pl-2 text-base leading-relaxed font-normal">
             {bulletPoints.map((bulletPoint, index) => (
               <motion.li
                 key={index}
