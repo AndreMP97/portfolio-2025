@@ -1,0 +1,46 @@
+name: Build and Deploy Docs Branch
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout main
+      - uses: actions/checkout@v3
+
+      # Setup Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Install pnpm
+      - run: npm install -g pnpm
+
+      # Install dependencies
+      - run: pnpm install --frozen-lockfile
+
+      # Build project
+      - run: pnpm exec rsbuild build --base /portfolio-2025/
+
+      # Replace docs
+      - run: |
+          rm -rf docs
+          mv dist docs
+
+      # Commit & push to dedicated branch
+      - run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B auto/docs-update
+          git add docs
+          git commit -m "Update /docs folder [skip ci]" || echo "No changes to commit"
+          git push -u origin auto/docs-update --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
