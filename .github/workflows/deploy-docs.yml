@@ -52,9 +52,9 @@ jobs:
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -B auto/docs-update
+          git checkout -B docs-folder-update
           git add docs
           git commit -m "Update /docs folder [skip ci]" || echo "No changes to commit"
-          git push -u origin auto/docs-update --force
+          git push -u origin docs-folder-update --force
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
