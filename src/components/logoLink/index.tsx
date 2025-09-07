@@ -30,7 +30,7 @@ export const LogoLink: React.FC<TLogoLinkProps> = ({
   return (
     <a
       aria-label={ariaLabel}
-      className="font-great-vibes hover:text-aqua-mint -rotate-12 text-3xl leading-tight font-bold text-white"
+      className="font-great-vibes hover:text-aqua-mint focus-ring text-3xl leading-tight font-bold text-white"
       href={href}
       onClick={onClick}
     >

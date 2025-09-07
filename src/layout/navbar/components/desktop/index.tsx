@@ -36,6 +36,7 @@ export const DesktopNavbar: React.FC<TDesktopNavbarProps> = ({ navLinks }) => {
           key={link.id}
           variants={navbarAnimations.desktopLinkItem}
           {...hoverInteraction}
+          tabIndex={-1}
         >
           <NavLink id={link.id} label={link.title} />
         </motion.li>

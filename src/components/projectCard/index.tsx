@@ -56,7 +56,7 @@ export const ProjectCard: React.FC<TProjectCardProps> = ({
       {...(url != null
         ? { href: url, rel: "noopener noreferrer", target: "_blank" }
         : {})}
-      className="group flex flex-col gap-4"
+      className="group focus-ring-lg flex flex-col gap-4"
     >
       <motion.img
         ref={imageRef}

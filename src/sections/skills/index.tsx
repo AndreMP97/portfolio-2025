@@ -29,6 +29,7 @@ export const SkillsSection: React.FC = () => {
           key={id}
           variants={skillsAnimations.card}
           {...hoverInteraction}
+          tabIndex={-1}
         >
           <SkillCard {...props} />
         </motion.div>

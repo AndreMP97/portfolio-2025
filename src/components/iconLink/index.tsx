@@ -20,9 +20,10 @@ export const IconLink: React.FC<TIconLinkProps> = ({
   return (
     <a
       aria-label={ariaLabel}
-      className="text-lavender-blue hover:text-aqua-mint transition-colors"
+      className="text-lavender-blue hover:text-aqua-mint focus-ring-full inline-block transition-colors"
       href={href}
       target="_blank"
+      rel="noopener noreferrer"
     >
       <Icon {...iconProps} />
     </a>
