@@ -1,10 +1,12 @@
 name: Build and Deploy Docs (PR)
 
-# Trigger when main branch is updated (PR merged)
+# Trigger when main branch is updated, but ignore /docs changes
 on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'docs/**'
 
 jobs:
   build-and-pr:
@@ -33,7 +35,7 @@ jobs:
           rm -rf docs
           mv dist docs
 
-      # 7. Create pull request back into main
+      # 7. Create pull request for docs update
       - name: Create PR for docs
         uses: peter-evans/create-pull-request@v5
         with:
