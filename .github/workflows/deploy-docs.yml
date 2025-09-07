@@ -32,7 +32,7 @@ jobs:
 
       # Build project
       - name: Build project
-        run: pnpm exec rsbuild build --base /portfolio-2025/
+        run: pnpm exec rsbuild build
 
       # Replace docs
       - name: Replace docs
@@ -54,7 +54,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -B docs-folder-update
           git add docs
-          git commit -m "Update /docs folder [skip ci]" || echo "No changes to commit"
+          git commit -m "feat: generated new /docs folder" || echo "No changes to commit"
           git push -u origin docs-folder-update --force
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
