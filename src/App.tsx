@@ -11,10 +11,10 @@ import { useSetup } from "hooks/useSetup";
 import { BreakpointProvider } from "providers/breakpointProvider";
 
 const App = () => {
-  useSetup();
+  const { mountKey } = useSetup();
 
   return (
-    <BreakpointProvider>
+    <BreakpointProvider key={mountKey}>
       <div className="bg-navy-blue font-space-grotesk relative flex min-h-screen flex-col overflow-x-hidden">
         <Navbar />
         <PageLayout />

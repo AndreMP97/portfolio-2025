@@ -1,18 +1,24 @@
 // React
 import { useMemo } from "react";
 
+// Constants
+import { heroCardAnimations } from "./constants";
+
 // Hooks
 import { useSectionInView } from "hooks/useSectionInView";
 
-// Zustand Store
-import { useLoadingStore } from "stores/loadingStore";
+// Providers
+import { useBreakpointContext } from "providers/breakpointProvider";
 
 export const useHeroCard = () => {
-  const { ref, inView } = useSectionInView();
+  const { ref, motionProps } = useSectionInView();
 
-  const canAnimate = useLoadingStore((store) => store.canAnimate);
+  const { isMobile } = useBreakpointContext();
 
-  const visible = useMemo(() => canAnimate && inView, [inView, canAnimate]);
+  const animations = useMemo(
+    () => (isMobile ? heroCardAnimations.mobile : heroCardAnimations.desktop),
+    [isMobile],
+  );
 
-  return { ref, visible };
+  return { heroCardAnimations: animations, motionProps, ref };
 };

@@ -5,7 +5,6 @@ import Photo from "assets/photo.jpg";
 import { ButtonLink, TButtonLinkProps } from "components/buttonLink";
 
 // Constants
-import { heroCardAnimations } from "./constants";
 import { hoverInteraction } from "utils/animations";
 
 // Framer-motion
@@ -44,14 +43,13 @@ export const HeroCard: React.FC<THeroCardProps> = ({
   subtitle,
   title,
 }) => {
-  const { ref, visible } = useHeroCard();
+  const { ref, heroCardAnimations, motionProps } = useHeroCard();
 
   return (
     <motion.div
       ref={ref}
       variants={heroCardAnimations.container}
-      initial="hidden"
-      animate={visible ? "visible" : "hidden"}
+      {...motionProps}
       className="border-aqua-mint bg-midnight-navy relative mt-16 flex flex-col items-center justify-center gap-8 overflow-hidden rounded-2xl border-2 p-6 shadow-2xl md:flex-row md:gap-12 md:p-8 lg:mt-20 lg:gap-16 lg:p-10"
     >
       <motion.div
@@ -90,8 +88,8 @@ export const HeroCard: React.FC<THeroCardProps> = ({
       </motion.div>
 
       <motion.img
-        {...hoverInteraction}
         variants={heroCardAnimations.image}
+        {...hoverInteraction}
         className="border-aqua-mint order-1 aspect-square h-32 w-32 rounded-full border-2 bg-cover bg-center bg-no-repeat hover:cursor-pointer md:order-2 md:h-40 md:w-40 lg:h-48 lg:w-48"
         src={Photo}
         alt="Portrait of André Pacheco"

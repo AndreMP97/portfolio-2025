@@ -2,8 +2,7 @@ import { Variants } from "framer-motion";
 import { fadeUp } from "constants/animations";
 
 export interface IProjectCardAnimations {
-  card: Variants;
-  container: Variants;
+  content: Variants;
   description: Variants;
   image: Variants;
   tags: Variants;
@@ -11,24 +10,16 @@ export interface IProjectCardAnimations {
 }
 
 export const projectCardAnimations: IProjectCardAnimations = {
-  card: {
+  content: {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.6,
-      },
-    },
-  },
-  container: {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.3,
       },
     },
   },
   description: fadeUp(0.4),
-  image: fadeUp(0.5),
+  image: fadeUp(),
   tags: fadeUp(0.4),
   title: fadeUp(0.4),
 };
