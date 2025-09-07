@@ -13,34 +13,48 @@ jobs:
 
     steps:
       # Checkout main
-      - uses: actions/checkout@v3
+      - name: Checkout main
+        uses: actions/checkout@v3
 
       # Setup Node.js
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 20
 
       # Install pnpm
-      - run: npm install -g pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       # Install dependencies
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       # Build project
-      - run: pnpm exec rsbuild build --base /portfolio-2025/
+      - name: Build project
+        run: pnpm exec rsbuild build --base /portfolio-2025/
 
       # Replace docs
-      - run: |
+      - name: Replace docs
+        run: |
           rm -rf docs
           mv dist docs
 
+      # Create CNAME file
+      - name: Create CNAME file
+        run: |
+          echo "$CNAME_DOMAIN" > docs/CNAME
+        env:
+          CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
+
       # Commit & push to dedicated branch
-      - run: |
+      - name: Commit & push to dedicated branch
+        run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -B auto/docs-update
+          git checkout -B docs-folder-update
           git add docs
           git commit -m "Update /docs folder [skip ci]" || echo "No changes to commit"
-          git push -u origin auto/docs-update --force
+          git push -u origin docs-folder-update --force
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
