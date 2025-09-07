@@ -9,47 +9,16 @@ type TSkillData = {
   props: TSkillCardProps;
 };
 
+const generateSkill = (props: TSkillCardProps): TSkillData => ({
+  id: nanoid(),
+  props,
+});
+
 export const skillsData: TSkillData[] = [
-  {
-    id: nanoid(),
-    props: {
-      description: "HTML, CSS, TypeScript",
-      iconName: "FaCode",
-    },
-  },
-  {
-    id: nanoid(),
-    props: {
-      description: "React.js, React Native",
-      iconName: "FaReact",
-    },
-  },
-  {
-    id: nanoid(),
-    props: {
-      description: "Responsive Design",
-      iconName: "FaMobileAlt",
-    },
-  },
-  {
-    id: nanoid(),
-    props: {
-      description: "Git & Version Control",
-      iconName: "FaGitAlt",
-    },
-  },
-  {
-    id: nanoid(),
-    props: {
-      description: "DevTools & Debugging",
-      iconName: "FaTools",
-    },
-  },
-  {
-    id: nanoid(),
-    props: {
-      description: "Optimization",
-      iconName: "FaTachometerAlt",
-    },
-  },
+  generateSkill({ description: "HTML, CSS, TypeScript", iconName: "FaCode" }),
+  generateSkill({ description: "React.js, React Native", iconName: "FaReact" }),
+  generateSkill({ description: "Responsive Design", iconName: "FaMobileAlt" }),
+  generateSkill({ description: "Git & Version Control", iconName: "FaGitAlt" }),
+  generateSkill({ description: "DevTools & Debugging", iconName: "FaTools" }),
+  generateSkill({ description: "Optimization", iconName: "FaTachometerAlt" }),
 ] as const;

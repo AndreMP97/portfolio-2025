@@ -1,5 +1,5 @@
 import { Variants } from "framer-motion";
-import { fadeUp } from "constants/animations";
+import { fadeUp } from "utils/animations";
 
 export interface IExperienceCardAnimations {
   bulletPoint: Variants;

@@ -2,7 +2,7 @@
 import { Variants } from "framer-motion";
 
 // Utils
-import { fadeUp } from "constants/animations";
+import { fadeUp } from "utils/animations";
 
 interface IHeroCardAnimations {
   button: Variants;

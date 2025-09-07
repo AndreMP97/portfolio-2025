@@ -1,6 +1,3 @@
-// nanoid
-import { nanoid } from "nanoid/non-secure";
-
 export const sectionKeys = {
   about: "about",
   contact: "contact",
@@ -23,44 +20,44 @@ export type TSection = {
 
 export const sectionsConfig: Record<TSectionKeys, TSection> = {
   [sectionKeys.hero]: {
-    id: nanoid(),
+    id: sectionKeys.hero,
     showInNavbar: false,
     showTitle: false,
     title: "Hero",
   },
   [sectionKeys.about]: {
-    id: nanoid(),
+    id: sectionKeys.about,
     showInNavbar: true,
     showTitle: true,
     title: "About Me",
   },
   [sectionKeys.skills]: {
-    id: nanoid(),
+    id: sectionKeys.skills,
     showInNavbar: true,
     showTitle: true,
     title: "Skills",
   },
   [sectionKeys.projects]: {
-    id: nanoid(),
+    id: sectionKeys.projects,
     showInNavbar: true,
     showTitle: true,
     title: "Projects",
   },
   [sectionKeys.experience]: {
-    id: nanoid(),
+    id: sectionKeys.experience,
     showInNavbar: true,
     showTitle: true,
     title: "Experience",
   },
   [sectionKeys.education]: {
-    id: nanoid(),
+    id: sectionKeys.education,
     showInNavbar: true,
     showTitle: true,
     title: "Education",
   },
   [sectionKeys.contact]: {
     altTitle: "Get in Touch",
-    id: nanoid(),
+    id: sectionKeys.contact,
     showInNavbar: true,
     showTitle: false,
     title: "Contact",

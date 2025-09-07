@@ -1,5 +1,5 @@
 import { Variants } from "framer-motion";
-import { fadeDown, fadeUp } from "constants/animations";
+import { fadeDown, fadeUp } from "utils/animations";
 
 export interface IContactCardAnimations {
   button: Variants;

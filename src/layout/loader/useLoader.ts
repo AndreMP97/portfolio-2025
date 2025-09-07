@@ -56,6 +56,7 @@ export const useLoader = () => {
         () => setSlidePanels(true),
         ANIMATION_FADE_OUT_LETTERS,
       );
+
       return () => clearTimeout(timer);
     }
   }, [isLoading]);
@@ -67,30 +68,46 @@ export const useLoader = () => {
         () => setHideLoader(true),
         ANIMATION_SLIDE_PANELS,
       );
+
       return () => clearTimeout(timer);
     }
   }, [slidePanels]);
 
-  // Disable body scroll and scroll to top when loader is active
+  // Disable body scroll when loading
   useEffect(() => {
     if (isLoading) {
+      // Freeze body scroll
+      document.body.style.position = "fixed";
+      document.body.style.top = "0";
+      document.body.style.left = "0";
+      document.body.style.right = "0";
       document.body.style.overflow = "hidden";
+      document.body.style.width = "100%";
 
-      window.scrollTo(0, 0);
+      // Immediately scroll to top
+      window.scrollTo({ behavior: "instant", left: 0, top: 0 });
     } else {
-      setTimeout(
-        () => (document.body.style.overflow = ""),
-        ANIMATION_SLIDE_PANELS,
-      );
+      // Unfreeze scroll after animation
+      setTimeout(() => {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.overflow = "";
+        document.body.style.width = "";
 
-      // If there's a hash in the URL, scroll to it
-      const hash = window.location.hash;
-      if (hash) {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
+        // Scroll to hash if present
+        const hash = window.location.hash;
+        if (hash) {
+          const element = document.querySelector(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        } else {
+          // Otherwise ensure scroll is at top
+          window.scrollTo({ behavior: "instant", left: 0, top: 0 });
         }
-      }
+      }, ANIMATION_SLIDE_PANELS);
     }
   }, [isLoading]);
 
