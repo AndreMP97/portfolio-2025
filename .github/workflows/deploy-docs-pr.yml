@@ -1,47 +1,46 @@
 name: Build and Deploy Docs (PR)
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - main
+    paths-ignore:
+      - 'docs/**'
 
 jobs:
   build-and-pr:
-    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref != 'docs-update'
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout main branch
       - uses: actions/checkout@v3
 
-      # 2. Setup Node.js
       - uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      # 3. Install pnpm
       - run: npm install -g pnpm
 
-      # 4. Install dependencies
       - run: pnpm install --frozen-lockfile
 
-      # 5. Build project with correct base path for GitHub Pages
-      - run: |
-          # replace <repo-name> with your repo, e.g., portfolio-2025
-          pnpm exec rsbuild build --base /portfolio-2025/
+      # Build with GitHub Pages base path
+      - run: pnpm exec rsbuild build --base /portfolio-2025/
 
-      # 6. Replace /docs with build output
+      # Replace docs folder
       - run: |
           rm -rf docs
           mv dist docs
 
-      # 7. Create a PR for /docs updates
+      # Generate a unique branch name
+      - name: Set branch name
+        id: branch
+        run: echo "BRANCH_NAME=docs-update-$(date +%s)" >> $GITHUB_ENV
+
+      # Create PR
       - name: Create PR for docs
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.PAT_TOKEN }}
-          branch: docs-update
+          branch: ${{ env.BRANCH_NAME }}
           base: main
           commit-message: "Update /docs folder [skip ci]"
           title: "Update /docs from workflow"
