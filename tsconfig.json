@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "lib": ["DOM", "ES2020"],
+    "jsx": "react-jsx",
+    "target": "ES2020",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "useDefineForClassFields": true,
+
+    /* modules */
+    "module": "ESNext",
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+
+    /* type checking */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    /* Path rules */
+    "baseUrl": "src",
+    "paths": {
+      "@assets": ["assets"],
+      "@components": ["components"],
+      "@config": ["config"],
+      "@data": ["data"],
+      "@hooks": ["hooks"],
+      "@layout": ["layout"],
+      "@providers": ["providers"],
+      "@sections": ["sections"],
+      "@stores": ["stores"],
+      "@utils": ["utils"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "build"]
+}
