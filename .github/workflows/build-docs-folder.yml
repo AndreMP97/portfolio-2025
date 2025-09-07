@@ -1,25 +1,40 @@
 name: Build Docs Folder in PR
 
 on:
-  pull_request:
-    branches:
-      - main
-    types: [opened, synchronize, reopened]
+  workflow_run:
+    workflows: ["PR Checks"]
+    types:
+      - completed
 
 jobs:
-  build-docs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 20
-      - run: npm ci
-      - run: rsbuild build
-      - run: |
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build site
+        run: rsbuild build
+
+      - name: Update /docs
+        run: |
           rm -rf docs
           mv dist docs
-      - run: |
+
+      - name: Commit and push /docs
+        run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git add docs
