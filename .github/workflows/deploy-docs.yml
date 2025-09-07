@@ -34,6 +34,9 @@ jobs:
           rm -rf docs
           mv dist docs
 
+      # Create CNAME file from secret
+      - run: echo "${{ secrets.CNAME_DOMAIN }}" > docs/CNAME
+
       # Commit & push to dedicated branch
       - run: |
           git config --local user.name "github-actions[bot]"
