@@ -6,7 +6,7 @@ export const skillsData: TSkillCardProps[] = [
     iconName: "FaCode",
   },
   {
-    description: "React.JS, React Native",
+    description: "React.js, React Native",
     iconName: "FaReact",
   },
   {

@@ -14,9 +14,9 @@ export const experienceData: TExperienceCardProps[] = [
     bulletPoints: [
       "Contributed to a project encompassing a design system, web app, and mobile app",
       "Developed and maintained the design system, including code reviews and workflow management",
-      "Built features for the web app using React.JS",
+      "Built features for the web app using React.js",
       "Implemented functionality for the mobile app using React Native",
-      "Leveraged cross-platform skills in React.JS and React Native, providing management with greater flexibility in resource allocation",
+      "Leveraged cross-platform skills in React.js and React Native, providing management with greater flexibility in resource allocation",
     ],
   },
   {
@@ -40,9 +40,9 @@ export const experienceData: TExperienceCardProps[] = [
     startDate: "Mar 2023",
     endDate: "Dec 2023",
     bulletPoints: [
-      "Designed and built digital and electronic systems through hands-on coursework",
-      "Applied network, automation, and computational skills in real-world projects",
-      "Completed a full-stack final degree project proposed and guided by the institution",
+      "Migrated subscription-based platform from Svelte to Next.js",
+      "Implemented UX/UI enhancements, approved and deployed to production",
+      "Developed features to boost revenue from professional subscribers",
     ],
   },
 ];
