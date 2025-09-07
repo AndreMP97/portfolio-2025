@@ -81,6 +81,7 @@ export const HeroCard: React.FC<THeroCardProps> = ({
               variants={heroCardAnimations.button}
               {...hoverInteraction}
               className="self-center md:self-start"
+              tabIndex={-1}
             >
               <ButtonLink {...button} />
             </motion.div>
@@ -96,6 +97,7 @@ export const HeroCard: React.FC<THeroCardProps> = ({
         onClick={() =>
           window.open(baseConfig.linkedin, "_blank", "noopener noreferrer")
         }
+        tabIndex={-1}
       />
     </motion.div>
   );

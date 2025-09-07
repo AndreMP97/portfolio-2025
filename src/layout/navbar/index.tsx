@@ -37,6 +37,7 @@ export const Navbar: React.FC = () => {
           variants={navbarAnimations.logo}
           {...hoverInteraction}
           className="-rotate-12"
+          tabIndex={-1}
         >
           <LogoLink {...logoProps} onClick={closeMobileMenu} />
         </motion.span>
@@ -45,7 +46,7 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Toggle Button */}
         <button
-          className="text-2xl text-white focus:outline-none md:hidden"
+          className="text-2xl text-white focus-visible:outline-none md:hidden"
           onClick={toggleMobileMenu}
           aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >

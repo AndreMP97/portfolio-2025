@@ -21,7 +21,10 @@ export const SkillCard: React.FC<TSkillCardProps> = ({
   iconName,
 }) => {
   return (
-    <div className="border-space-blue bg-midnight-navy hover:border-aqua-mint flex flex-1 items-center gap-5 rounded-lg border p-4 shadow-md transition-colors md:p-6">
+    <div
+      className="border-space-blue bg-midnight-navy hover:border-aqua-mint flex flex-1 items-center gap-5 rounded-lg border p-4 shadow-md transition-colors md:p-6"
+      tabIndex={-1}
+    >
       <Icon className="text-aqua-mint" iconName={iconName} />
       <h3 className="text-lg leading-tight font-semibold text-white">
         {description}

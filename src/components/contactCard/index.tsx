@@ -70,6 +70,7 @@ export const ContactCard: React.FC<TContactCardProps> = ({
                 key={button.id}
                 variants={contactCardAnimations.button}
                 {...hoverInteraction}
+                tabIndex={-1}
               >
                 <ButtonLink {...button} />
               </motion.div>
