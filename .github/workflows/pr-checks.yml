@@ -2,24 +2,34 @@ name: PR Checks
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
 
 jobs:
   build-test-lint:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+
+      - uses: actions/setup-node@v3
         with:
           node-version: 20
-      - name: Install pnpm
-        run: npm install -g pnpm
-      - name: Install dependencies
-        run: pnpm install
-      - name: Typecheck
-        run: pnpm run typecheck
-      - name: Lint
-        run: pnpm run lint
-      - name: Build
-        run: pnpm run build
+
+      - run: npm install -g pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # Build your project
+      - run: rsbuild build
+
+      # Optional tests & lint
+      - run: pnpm test
+      - run: pnpm lint
+
+      # Save dist/ as artifact for deploy workflow
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs-build
+          path: dist

@@ -1,0 +1,43 @@
+name: Deploy Docs on Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout main
+      - uses: actions/checkout@v3
+
+      # Setup Node.js & pnpm
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm install -g pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # Download the latest PR artifact (optional)
+      - name: Download latest docs artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docs-build
+          path: dist
+
+      # Replace /docs with build output
+      - run: |
+          rm -rf docs
+          mv dist docs
+
+      # Commit /docs back to main
+      - run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git commit -m "Update docs folder [skip ci]" || echo "No changes to commit"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
