@@ -1,11 +1,18 @@
-import { THeroCardProps } from "components/heroCard";
+// Config
 import { baseConfig } from "config/base";
+
+// nanoid
+import { nanoid } from "nanoid/non-secure";
+
+// Types
+import { THeroCardProps } from "components/heroCard";
 
 export const heroData: THeroCardProps = {
   buttons: [
     {
       ariaLabel: "Resume download",
       href: baseConfig.resume,
+      id: nanoid(),
       label: "Resume",
     },
   ],

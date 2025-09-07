@@ -24,13 +24,13 @@ export const SkillsSection: React.FC = () => {
       {...motionProps}
       className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4"
     >
-      {skillsData.map((skill) => (
+      {skillsData.map(({ id, props }) => (
         <motion.div
-          key={skill.description}
+          key={id}
           variants={skillsAnimations.card}
           {...hoverInteraction}
         >
-          <SkillCard {...skill} />
+          <SkillCard {...props} />
         </motion.div>
       ))}
     </motion.div>

@@ -12,12 +12,16 @@ import { useSectionInView } from "hooks/useSectionInView";
 
 // Types
 import { educationCardType, TEducationCardType } from "./types";
+import { useMemo } from "react";
 
 export type TEducationCardProps = {
   /**
    * The eduction card bullet points.
    */
-  bulletPoints: string[];
+  bulletPoints: {
+    bulletPoint: string;
+    id: string;
+  }[];
 
   /**
    * The eduction card bullet points title.
@@ -68,8 +72,13 @@ export const EducationCard: React.FC<TEducationCardProps> = ({
 }) => {
   const { ref, motionProps } = useSectionInView();
 
-  const iconName =
-    type === educationCardType.university ? "FaGraduationCap" : "FaCertificate";
+  const iconName = useMemo(
+    () =>
+      type === educationCardType.university
+        ? "FaGraduationCap"
+        : "FaCertificate",
+    [type],
+  );
 
   return (
     <motion.div
@@ -95,7 +104,7 @@ export const EducationCard: React.FC<TEducationCardProps> = ({
         >
           {place} |{" "}
           <span className="text-dusty-blue">
-            {startDate && `${startDate} - `}
+            {startDate != null && `${startDate} - `}
             {endDate}
           </span>
         </motion.p>
@@ -115,9 +124,9 @@ export const EducationCard: React.FC<TEducationCardProps> = ({
             {bulletPointsTitle}
           </motion.h4>
           <ul className="text-lavender-blue marker:text-aqua-mint list-inside list-disc space-y-1 pl-2 text-base leading-relaxed font-normal">
-            {bulletPoints.map((bulletPoint, index) => (
+            {bulletPoints.map(({ id, bulletPoint }) => (
               <motion.li
-                key={index}
+                key={id}
                 variants={educationCardAnimations.bulletPoint}
               >
                 {bulletPoint}

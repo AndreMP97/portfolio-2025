@@ -17,7 +17,7 @@ export const useBreakpoint = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (timeoutRef.current) {
+      if (timeoutRef.current != null) {
         clearTimeout(timeoutRef.current);
       }
 
@@ -31,7 +31,7 @@ export const useBreakpoint = () => {
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      if (timeoutRef.current) {
+      if (timeoutRef.current != null) {
         clearTimeout(timeoutRef.current);
       }
     };

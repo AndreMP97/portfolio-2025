@@ -20,7 +20,10 @@ export type TExperienceCardProps = {
   /**
    * The experience card bullet points
    */
-  bulletPoints: string[];
+  bulletPoints: {
+    bulletPoint: string;
+    id: string;
+  }[];
 
   /**
    * The experience card company
@@ -95,11 +98,8 @@ export const ExperienceCard: React.FC<TExperienceCardProps> = ({
         </motion.p>
 
         <ul className="text-lavender-blue marker:text-aqua-mint list-inside list-disc space-y-1 pl-1 leading-relaxed font-normal">
-          {bulletPoints.map((bulletPoint, index) => (
-            <motion.li
-              key={`bullet-${index}`}
-              variants={experienceCardAnimations.bulletPoint}
-            >
+          {bulletPoints.map(({ id, bulletPoint }) => (
+            <motion.li key={id} variants={experienceCardAnimations.bulletPoint}>
               {bulletPoint}
             </motion.li>
           ))}

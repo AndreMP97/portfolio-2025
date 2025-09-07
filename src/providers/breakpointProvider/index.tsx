@@ -1,5 +1,5 @@
 // React
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, ReactNode, useMemo } from "react";
 
 // Hooks
 import { useBreakpoint } from "hooks/useBreakpoint";
@@ -16,8 +16,13 @@ const BreakpointContext = createContext<TBreakpointContext | undefined>(
 export const BreakpointProvider = ({ children }: { children: ReactNode }) => {
   const { isMobile, isTablet } = useBreakpoint();
 
+  const contextValue = useMemo(
+    () => ({ isMobile, isTablet }),
+    [isMobile, isTablet],
+  );
+
   return (
-    <BreakpointContext.Provider value={{ isMobile, isTablet }}>
+    <BreakpointContext.Provider value={contextValue}>
       {children}
     </BreakpointContext.Provider>
   );

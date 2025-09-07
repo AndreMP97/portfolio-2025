@@ -77,7 +77,7 @@ export const HeroCard: React.FC<THeroCardProps> = ({
         {!!buttons &&
           buttons.map((button) => (
             <motion.div
-              key={button.label}
+              key={button.id}
               variants={heroCardAnimations.button}
               {...hoverInteraction}
               className="self-center md:self-start"

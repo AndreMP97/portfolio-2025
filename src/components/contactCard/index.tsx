@@ -65,9 +65,9 @@ export const ContactCard: React.FC<TContactCardProps> = ({
             variants={contactCardAnimations.content}
             className="flex w-full flex-col gap-6 md:flex-row md:items-center md:justify-center md:gap-8"
           >
-            {buttons.map((button, index) => (
+            {buttons.map((button) => (
               <motion.div
-                key={index}
+                key={button.id}
                 variants={contactCardAnimations.button}
                 {...hoverInteraction}
               >

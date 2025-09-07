@@ -29,7 +29,7 @@ export const Icon: React.FC<TIconProps> = ({
 
   const rootClasses = useMemo(() => {
     let result = "flex-shrink-0";
-    if (className) result = `${result} ${className}`;
+    if (className != null) result = `${result} ${className}`;
     return result;
   }, [className]);
 

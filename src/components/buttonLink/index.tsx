@@ -13,6 +13,11 @@ export type TButtonLinkProps = {
   href: string;
 
   /**
+   * The button id.
+   */
+  id: string;
+
+  /**
    * The button label.
    */
   label: string;

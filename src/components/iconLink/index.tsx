@@ -15,8 +15,7 @@ export type TIconLinkProps = TIconProps & {
 export const IconLink: React.FC<TIconLinkProps> = ({
   ariaLabel,
   href,
-  iconName,
-  size,
+  ...iconProps
 }) => {
   return (
     <a
@@ -25,7 +24,7 @@ export const IconLink: React.FC<TIconLinkProps> = ({
       href={href}
       target="_blank"
     >
-      <Icon iconName={iconName} size={size} />
+      <Icon {...iconProps} />
     </a>
   );
 };

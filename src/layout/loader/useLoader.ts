@@ -21,17 +21,10 @@ export const useLoader = () => {
   const [hideLoader, setHideLoader] = useState(false);
   const [slidePanels, setSlidePanels] = useState(false);
 
-  const leftPanelAnimate = useMemo(
-    () =>
-      slidePanels
-        ? isTablet
-          ? "slideUp"
-          : "slideLeft"
-        : isTablet
-          ? "hiddenUp"
-          : "hiddenLeft",
-    [isTablet, slidePanels],
-  );
+  const leftPanelAnimate = useMemo(() => {
+    if (slidePanels) return isTablet ? "slideUp" : "slideLeft";
+    return isTablet ? "hiddenUp" : "hiddenLeft";
+  }, [isTablet, slidePanels]);
 
   const leftPanelClass = useMemo(
     () =>
@@ -41,17 +34,10 @@ export const useLoader = () => {
     [isTablet],
   );
 
-  const rightPanelAnimate = useMemo(
-    () =>
-      slidePanels
-        ? isTablet
-          ? "slideDown"
-          : "slideRight"
-        : isTablet
-          ? "hiddenDown"
-          : "hiddenRight",
-    [isTablet, slidePanels],
-  );
+  const rightPanelAnimate = useMemo(() => {
+    if (slidePanels) return isTablet ? "slideDown" : "slideRight";
+    return isTablet ? "hiddenDown" : "hiddenRight";
+  }, [isTablet, slidePanels]);
 
   const rightPanelClass = useMemo(
     () =>

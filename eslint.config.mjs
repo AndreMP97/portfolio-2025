@@ -3,8 +3,8 @@ import tsParser from "@typescript-eslint/parser";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import jsxA11y from "eslint-plugin-jsx-a11y";
-// import tailwindcss from "eslint-plugin-tailwindcss";
 import prettierConfig from "eslint-config-prettier";
+import tsSortKeys from "eslint-plugin-typescript-sort-keys";
 
 export default [
   {
@@ -14,28 +14,29 @@ export default [
       parserOptions: {
         sourceType: "module",
         ecmaVersion: 2022,
-        ecmaFeatures: {
-          jsx: true,
-        },
-        project: "./tsconfig.json", // optional if you use rules that require type info
+        ecmaFeatures: { jsx: true },
+        project: "./tsconfig.json", // Required for type-aware rules
       },
     },
     settings: {
-      react: {
-        version: "detect",
-      },
+      react: { version: "detect" },
     },
     plugins: {
       "@typescript-eslint": tseslint,
       react,
       "react-hooks": reactHooks,
       "jsx-a11y": jsxA11y,
-      // tailwindcss,
+      "typescript-sort-keys": tsSortKeys,
     },
     rules: {
       // TypeScript rules
-      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-floating-promises": "error",
+      "@typescript-eslint/strict-boolean-expressions": "error",
+      "@typescript-eslint/no-misused-promises": "error",
+      "@typescript-eslint/no-unnecessary-type-assertion": "warn",
+      "@typescript-eslint/no-explicit-any": "off",
 
       // React rules
       "react/react-in-jsx-scope": "off",
@@ -49,11 +50,11 @@ export default [
       // Accessibility
       "jsx-a11y/anchor-is-valid": "warn",
 
-      // Tailwind CSS
-      // "tailwindcss/classnames-order": "warn",
-
       // Sorting keys in objects
       "sort-keys": ["error", "asc", { caseSensitive: false, natural: true }],
+
+      // Sorting keys in TypeScript interfaces
+      "typescript-sort-keys/interface": "error",
     },
   },
   {

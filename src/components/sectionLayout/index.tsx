@@ -30,7 +30,7 @@ export const SectionLayout: React.FC<TSectionLayoutProps> = ({
 
   return (
     <section className="flex scroll-mt-24 flex-col gap-6" id={id}>
-      {title && (
+      {title != null && (
         <motion.h2
           ref={ref}
           variants={sectionAnimations.title}

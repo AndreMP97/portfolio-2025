@@ -5,8 +5,8 @@ import { fadeUp } from "utils/animations";
 import { Variants } from "framer-motion";
 
 interface ISkillsAnimations {
-  container: Variants;
   card: Variants;
+  container: Variants;
 }
 
 export const skillsAnimations: ISkillsAnimations = {

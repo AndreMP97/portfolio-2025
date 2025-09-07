@@ -32,9 +32,9 @@ export const Footer: React.FC = () => {
             className="flex gap-4"
             {...motionProps}
           >
-            {icons.map((icon) => (
+            {icons.map(({ id, icon }) => (
               <motion.li
-                key={icon.href}
+                key={id}
                 variants={footerAnimations.icon}
                 {...footerInteractions}
               >

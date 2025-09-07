@@ -20,19 +20,22 @@ export type TProjectCardProps = {
   image: string;
 
   /**
-   * The project card url
-   */
-  url?: string;
-
-  /**
    * The project card tags
    */
-  tags?: string[];
+  tags?: {
+    description: string;
+    id: string;
+  }[];
 
   /**
    * The project card title
    */
   title: string;
+
+  /**
+   * The project card url
+   */
+  url?: string;
 };
 
 export const ProjectCard: React.FC<TProjectCardProps> = ({
@@ -46,11 +49,11 @@ export const ProjectCard: React.FC<TProjectCardProps> = ({
     useSectionInView<HTMLImageElement>();
   const { ref: contentRef, motionProps: contentMotion } = useSectionInView();
 
-  const Wrapper = url ? "a" : "div";
+  const Wrapper = url != null ? "a" : "div";
 
   return (
     <Wrapper
-      {...(url
+      {...(url != null
         ? { href: url, rel: "noopener noreferrer", target: "_blank" }
         : {})}
       className="group flex flex-col gap-4"
@@ -88,8 +91,8 @@ export const ProjectCard: React.FC<TProjectCardProps> = ({
             variants={projectCardAnimations.tags}
             className="flex flex-wrap gap-2"
           >
-            {tags.map((tag, index) => (
-              <Tag key={`tag-${index}`} description={tag} />
+            {tags.map(({ id, description }) => (
+              <Tag key={id} description={description} />
             ))}
           </motion.div>
         )}
