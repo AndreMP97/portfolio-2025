@@ -58,6 +58,14 @@
   .section-container {
     @apply w-full px-2 sm:px-3 md:px-4;
   }
+
+  .z-loader {
+    z-index: 9999;
+  }
+
+  .z-navbar {
+    z-index: 1000;
+  }
 }
 
 html {

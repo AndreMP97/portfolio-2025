@@ -15,7 +15,7 @@ export const Loader: React.FC = () => {
   if (hideLoader) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[9999] flex">
+    <div className="z-loader pointer-events-none fixed inset-0 flex">
       {/* Left Panel */}
       <motion.div
         animate={leftPanelAnimate}

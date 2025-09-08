@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
     <motion.header
       variants={navbarAnimations.container}
       {...motionProps}
-      className="border-b-space-blue bg-navy-blue/70 fixed z-50 flex h-20 w-full items-center justify-center border-b border-solid whitespace-nowrap"
+      className="border-b-space-blue bg-navy-blue/70 top-safe left-safe right-safe z-navbar sticky flex h-20 w-full items-center justify-center border-b border-solid whitespace-nowrap"
     >
       <nav
         className="container-layout flex h-full flex-1 items-center justify-between backdrop-blur-xs"
