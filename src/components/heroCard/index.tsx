@@ -1,5 +1,5 @@
 // Assets
-import Photo from "assets/photo.jpg";
+import Photo from "assets/photo.webp";
 
 // Components
 import { ButtonLink, TButtonLinkProps } from "components/buttonLink";

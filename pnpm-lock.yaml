@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@fontsource/great-vibes':
-        specifier: ^5.2.6
-        version: 5.2.7
-      '@fontsource/space-grotesk':
-        specifier: ^5.2.8
-        version: 5.2.9
       framer-motion:
         specifier: ^12.23.12
         version: 12.23.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -21,8 +15,8 @@ importers:
         specifier: ^5.1.5
         version: 5.1.5
       npm-check-updates:
-        specifier: ^18.0.3
-        version: 18.0.3
+        specifier: ^18.1.0
+        version: 18.1.0
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -76,8 +70,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0(@typescript-eslint/parser@8.42.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.9.2))(eslint@9.35.0(jiti@2.5.1))(typescript@5.9.2)
       husky:
-        specifier: ^8.0.0
-        version: 8.0.3
+        specifier: ^9.1.7
+        version: 9.1.7
       lint-staged:
         specifier: ^16.1.6
         version: 16.1.6
@@ -146,12 +140,6 @@ packages:
   '@eslint/plugin-kit@0.3.5':
     resolution: {integrity: sha512-Z5kJ+wU3oA7MMIqVR9tyZRtjYPr4OC004Q4Rw7pgOKUOKkJfZ3O24nz3WYfGRpMDNmcOi3TwQOmgm7B7Tpii0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@fontsource/great-vibes@5.2.7':
-    resolution: {integrity: sha512-qkwvd9uibKjZctMxownq/0e3s2AEe9x4hqtDCohOVegLW/YqVw/6ilneMRkEwZ+J9TFWXE0ekGJQrUpzv9dGtA==}
-
-  '@fontsource/space-grotesk@5.2.9':
-    resolution: {integrity: sha512-oR4zVJ7QH7lYfQ/WnW9bGHW3av/HtChs0seKr23+6x9RN02r4UCuT5Nse/kQODj+PJ+GTh22jGXCH6AFZelp1g==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1000,9 +988,9 @@ packages:
   html-entities@2.6.0:
     resolution: {integrity: sha512-kig+rMn/QOVRvr7c86gQ8lWXq+Hkv6CbAH1hLu+RG338StTpE8Z0b44SDVaqVu7HGKf27frdmUYEs9hTUX/cLQ==}
 
-  husky@8.0.3:
-    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
-    engines: {node: '>=14'}
+  husky@9.1.7:
+    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
+    engines: {node: '>=18'}
     hasBin: true
 
   ignore@5.3.2:
@@ -1344,8 +1332,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  npm-check-updates@18.0.3:
-    resolution: {integrity: sha512-IMZWxgAa5gpDVEle2KOZOMLfCu2/9FV+xsXQjPFt2OV0dyZixn0OJrZ9NxUcWgr/ZTGogmZtE0Cb8x2wlsVULg==}
+  npm-check-updates@18.1.0:
+    resolution: {integrity: sha512-1TQ6fO4HxVW4K/TWUPOa1KRbaL0Y9+CgDJeTkrA3c4YFgaW8uoxllCKlm4OM/28C9E9NR3MlkxtcFs0Z1VaCPg==}
     engines: {node: ^18.18.0 || >=20.0.0, npm: '>=8.12.1'}
     hasBin: true
 
@@ -1889,10 +1877,6 @@ snapshots:
     dependencies:
       '@eslint/core': 0.15.2
       levn: 0.4.1
-
-  '@fontsource/great-vibes@5.2.7': {}
-
-  '@fontsource/space-grotesk@5.2.9': {}
 
   '@humanfs/core@0.19.1': {}
 
@@ -2914,7 +2898,7 @@ snapshots:
 
   html-entities@2.6.0: {}
 
-  husky@8.0.3: {}
+  husky@9.1.7: {}
 
   ignore@5.3.2: {}
 
@@ -3235,7 +3219,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  npm-check-updates@18.0.3: {}
+  npm-check-updates@18.1.0: {}
 
   object-assign@4.1.1: {}
 

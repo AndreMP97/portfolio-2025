@@ -1,8 +1,8 @@
 /* eslint-disable sort-keys */
 
 // Assets
-import ManagmentPlatform from "assets/PESTA.png";
-import WeatherProject from "assets/weatherProject.png";
+import ManagmentPlatform from "assets/PESTA.webp";
+import WeatherProject from "assets/weatherProject.webp";
 
 // nanoid
 import { nanoid } from "nanoid/non-secure";
