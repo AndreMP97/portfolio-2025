@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <BreakpointProvider key={mountKey}>
-      <div className="bg-navy-blue font-space-grotesk relative flex min-h-svh flex-col overflow-x-hidden">
+      <div className="bg-navy-blue font-space-grotesk relative flex min-h-svh flex-col">
         <Navbar />
         <PageLayout />
         <Footer />

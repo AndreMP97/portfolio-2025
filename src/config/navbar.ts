@@ -18,8 +18,8 @@ export type TNavbarConfig = {
 
 export const navbarConfig: TNavbarConfig = {
   logoProps: {
-    ariaLabel: sectionsConfig.hero.title,
-    href: `#${sectionsConfig.hero.id}`,
+    ariaLabel: "André Pacheco's portfolio",
+    href: "#",
     label: "AP",
   },
   navLinks: Object.values(sectionsConfig).filter(
