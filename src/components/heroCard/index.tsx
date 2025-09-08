@@ -50,7 +50,7 @@ export const HeroCard: React.FC<THeroCardProps> = ({
       ref={ref}
       variants={heroCardAnimations.container}
       {...motionProps}
-      className="border-aqua-mint bg-midnight-navy relative mt-16 flex flex-col items-center justify-center gap-8 overflow-hidden rounded-2xl border-2 p-6 shadow-2xl md:flex-row md:gap-12 md:p-8 lg:mt-20 lg:gap-16 lg:p-10"
+      className="border-aqua-mint bg-midnight-navy relative mt-20 flex flex-col items-center justify-center gap-8 overflow-hidden rounded-2xl border-2 p-6 shadow-2xl md:flex-row md:gap-12 md:p-8 lg:mt-20 lg:gap-16 lg:p-10"
     >
       <motion.div
         variants={heroCardAnimations.textContainer}

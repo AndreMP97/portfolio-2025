@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tailwindcss-safe-area";
 
 /* Great Vibes - 400 */
 @font-face {
