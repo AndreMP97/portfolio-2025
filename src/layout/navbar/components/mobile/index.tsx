@@ -44,7 +44,7 @@ export const MobileNavbar: React.FC<TMobileNavbarProps> = ({
         <motion.div
           {...motionProps}
           variants={navbarAnimations.mobileMenu}
-          className="bg-navy-blue z-navbar absolute top-20 left-0 h-full w-full text-white md:hidden"
+          className="bg-navy-blue z-navbar fixed inset-0 top-20 h-full w-full text-white md:hidden"
         >
           <motion.ul className="flex h-full flex-col items-center justify-center gap-8 pb-20 text-xl">
             {navLinks.map((link) => (
