@@ -18,7 +18,7 @@ import { hoverInteraction } from "utils/animations";
 import { useNavbar } from "./useNavbar";
 
 export const Navbar: React.FC = () => {
-  const { logoProps, navLinks } = navbarConfig;
+  const { logoProps, navLinks, onClick: navbarOnClick } = navbarConfig;
   const { closeMobileMenu, isMobileMenuOpen, motionProps, toggleMobileMenu } =
     useNavbar();
 
@@ -26,20 +26,26 @@ export const Navbar: React.FC = () => {
     <motion.header
       variants={navbarAnimations.container}
       {...motionProps}
-      className="border-b-space-blue bg-navy-blue/70 top-safe left-safe right-safe z-navbar sticky flex h-20 w-full items-center justify-center border-b border-solid whitespace-nowrap"
+      className="border-b-space-blue bg-navy-blue flex h-20 w-full items-center justify-center border-b border-solid whitespace-nowrap"
     >
       <nav
-        className="container-layout flex h-full flex-1 items-center justify-between backdrop-blur-xs"
+        className="container-layout flex flex-1 items-center justify-between"
         role="navigation"
         aria-label="Main navigation"
       >
         <motion.span
           variants={navbarAnimations.logo}
           {...hoverInteraction}
-          className="-rotate-12"
+          className="-rotate-12 p-2"
           tabIndex={-1}
         >
-          <LogoLink {...logoProps} onClick={closeMobileMenu} />
+          <LogoLink
+            {...logoProps}
+            onClick={() => {
+              navbarOnClick();
+              closeMobileMenu();
+            }}
+          />
         </motion.span>
 
         <DesktopNavbar navLinks={navLinks} />

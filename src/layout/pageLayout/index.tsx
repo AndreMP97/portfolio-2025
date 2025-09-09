@@ -7,7 +7,7 @@ import { sectionsConfig, TSectionKeys } from "config/sections";
 
 export const PageLayout: React.FC = () => {
   return (
-    <main className="container-layout flex flex-1 flex-col justify-start gap-16 overflow-x-hidden py-16 lg:gap-20 lg:py-20">
+    <main className="container-layout flex flex-1 flex-col justify-start gap-16 py-16 lg:gap-20 lg:py-20">
       {Object.entries(sectionsConfig).map(([key, section]) => {
         const Component = sectionComponents[key as TSectionKeys];
         const title = section.showTitle ? section.title : undefined;

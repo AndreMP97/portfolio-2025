@@ -29,7 +29,7 @@ export const SectionLayout: React.FC<TSectionLayoutProps> = ({
   const { ref, motionProps } = useSectionInView<HTMLHeadingElement>();
 
   return (
-    <section className="flex scroll-mt-24 flex-col gap-6" id={id}>
+    <section className="flex scroll-mt-4 flex-col gap-6" id={id}>
       {title != null && (
         <motion.h2
           ref={ref}
