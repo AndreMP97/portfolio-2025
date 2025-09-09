@@ -75,6 +75,8 @@ export const useLoader = () => {
 
   // Disable body scroll when loading
   useEffect(() => {
+    const el = document.getElementById("content-wrapper") as HTMLDivElement;
+
     if (isLoading) {
       // Freeze body scroll
       document.body.style.position = "fixed";
@@ -85,7 +87,7 @@ export const useLoader = () => {
       document.body.style.width = "100%";
 
       // Immediately scroll to top
-      window.scrollTo({ behavior: "instant", left: 0, top: 0 });
+      el.scrollTo({ behavior: "instant", left: 0, top: 0 });
     } else {
       // Unfreeze scroll after animation
       setTimeout(() => {
@@ -105,7 +107,7 @@ export const useLoader = () => {
           }
         } else {
           // Otherwise ensure scroll is at top
-          window.scrollTo({ behavior: "instant", left: 0, top: 0 });
+          el.scrollTo({ behavior: "instant", left: 0, top: 0 });
         }
       }, ANIMATION_SLIDE_PANELS);
     }

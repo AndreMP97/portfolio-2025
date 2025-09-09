@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "tailwindcss-safe-area";
+@plugin 'tailwind-scrollbar';
 
 /* Great Vibes - 400 */
 @font-face {
