@@ -102,7 +102,7 @@ jobs:
           git pull --rebase origin $BRANCH_NAME
 
           # Re-read versions *after* fetch and rebase
-          MAIN_VERSION=$(git show origin/main:package.json | node -p "require('./package.json').version")
+          MAIN_VERSION=$(git show origin/main:package.json | grep '"version"' | head -1 | sed -e 's/.*"version": *"\([^"]*\)".*/\1/')
           BRANCH_VERSION=$(node -p "require('./package.json').version")
 
           echo "Main version: $MAIN_VERSION"
