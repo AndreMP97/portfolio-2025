@@ -60,11 +60,12 @@ jobs:
         env:
           CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
 
-      # Bump package version and commit all changes
-      - name: Commit and push changes
+      # Pull latest changes, bump package version, and commit all changes
+      - name: Pull latest changes, commit, and push
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin ${{ github.head_ref }}
           npm version patch --no-git-tag-version
           git add package.json pnpm-lock.yaml docs
           git commit -m "chore: bump version and update docs to $(node -p "require('./package.json').version")" || echo "No changes to commit"
