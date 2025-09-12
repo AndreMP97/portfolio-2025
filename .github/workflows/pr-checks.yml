@@ -6,6 +6,7 @@ on:
       - main
     types: [opened, synchronize, reopened]
 
+# Allow workflow to trigger itself
 permissions:
   contents: write
   pull-requests: write
@@ -100,11 +101,17 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Always fetch latest main first
-          git fetch origin main
+          # Fetch main properly to avoid "new branch" messages
+          git fetch origin main:refs/remotes/origin/main
 
-          # Make sure we are rebased on main so we can compare cleanly
-          git pull --rebase origin $BRANCH_NAME
+          # Stash local changes (docs, package.json, etc.)
+          git stash push --include-untracked || true
+
+          # Rebase PR branch on top of main
+          git rebase origin/main || git rebase --abort
+
+          # Restore stashed changes
+          git stash pop || true
 
           # Re-read versions *after* fetch and rebase
           MAIN_VERSION=$(git show origin/main:package.json | grep '"version"' | head -1 | sed -e 's/.*"version": *"\([^"]*\)".*/\1/')
