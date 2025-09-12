@@ -95,14 +95,15 @@ jobs:
         env:
           CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
 
-      # Pull latest changes, bump version, and push all changes
+      # Pull latest changes, and push all changes
       - name: Pull latest changes, bump version, and push
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git stash
           git pull --rebase origin $BRANCH_NAME
-          npm version patch --no-git-tag-version
-          git add package.json pnpm-lock.yaml docs
+          git stash pop || echo "No stashed changes"
+          git add docs
           git commit -m "chore: build new docs" || echo "No changes to commit"
           git push origin HEAD:$BRANCH_NAME
         env:
