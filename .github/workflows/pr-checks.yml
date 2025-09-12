@@ -5,6 +5,10 @@ on:
     branches:
       - main
     types: [opened, synchronize, reopened]
+    paths-ignore:
+      - 'docs/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
 
 jobs:
   build-test-lint:
@@ -12,22 +16,58 @@ jobs:
 
     steps:
       # Checkout PR branch
-      - uses: actions/checkout@v3
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+
+      # Clean /docs folder
+      - name: Clean /docs folder
+        run: rm -rf docs
 
       # Setup Node.js
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 20
 
       # Install pnpm
-      - run: npm install -g pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       # Install dependencies
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      # Build project with rsbuild
-      - run: pnpm exec rsbuild build
+      # Run typecheck
+      - name: Run typecheck
+        run: pnpm typecheck
 
-      # Run typecheck and lint
-      - run: pnpm typecheck
-      - run: pnpm lint
+      # Run lint
+      - name: Run lint
+        run: pnpm lint
+
+      # Build project
+      - name: Build project
+        run: pnpm exec rsbuild build
+
+      # Replace docs
+      - name: Replace docs
+        run: mv dist docs
+
+      # Create CNAME file
+      - name: Create CNAME file
+        run: |
+          echo "$CNAME_DOMAIN" > docs/CNAME
+        env:
+          CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
+
+      # Bump package version and commit all changes
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          npm version patch --no-git-tag-version
+          git add package.json pnpm-lock.yaml docs
+          git commit -m "chore: bump version and update docs to $(node -p "require('./package.json').version")" || echo "No changes to commit"
+          git push origin HEAD:${{ github.head_ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
