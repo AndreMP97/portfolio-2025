@@ -7,27 +7,38 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  check-files:
+  check-last-commit:
     runs-on: ubuntu-latest
     outputs:
-      docs_changed: ${{ steps.filter.outputs.docs }}
+      skip_build: ${{ steps.check.outputs.skip_build }}
     steps:
       # Checkout PR branch
       - name: Checkout PR branch
         uses: actions/checkout@v3
 
-      # Check if docs/** files were changed
-      - name: Filter file changes
-        id: filter
-        uses: dorny/paths-filter@v2
+      # Setup Node.js (needed to read package.json version)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          filters: |
-            docs:
-              - 'docs/**'
+          node-version: 20
+
+      # Get last commit message and compare to expected version bump message
+      - name: Check last commit message
+        id: check
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          COMMIT_MSG=$(git log -1 --pretty=%s)
+          echo "Last commit message: $COMMIT_MSG"
+          if [[ "$COMMIT_MSG" == "chore: bump version and update docs to $VERSION" ]]; then
+            echo "skip_build=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip_build=false" >> $GITHUB_OUTPUT
+          fi
 
   build-test-lint:
     runs-on: ubuntu-latest
-    needs: check-files
+    needs: check-last-commit
+    if: needs.check-last-commit.outputs.skip_build == 'false'
 
     steps:
       # Checkout PR branch
@@ -50,7 +61,6 @@ jobs:
 
       # Run typecheck
       - name: Run typecheck
-        if: needs.check-files.outputs.docs_changed == 'false'
         run: pnpm typecheck
 
       # Run lint
@@ -59,30 +69,25 @@ jobs:
 
       # Clean /docs folder
       - name: Clean /docs folder
-        if: needs.check-files.outputs.docs_changed == 'false'
         run: rm -rf docs
 
       # Build project
       - name: Build project
-        if: needs.check-files.outputs.docs_changed == 'false'
         run: pnpm exec rsbuild build
 
       # Replace docs
       - name: Replace docs
-        if: needs.check-files.outputs.docs_changed == 'false'
         run: mv dist docs
 
       # Create CNAME file
       - name: Create CNAME file
-        if: needs.check-files.outputs.docs_changed == 'false'
         run: |
           echo "$CNAME_DOMAIN" > docs/CNAME
         env:
           CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
 
-      # Pull latest changes, bump version, and push all changes
+      # Pull latest changes, bump version, and push
       - name: Pull latest changes, bump version, and push
-        if: needs.check-files.outputs.docs_changed == 'false'
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -94,3 +99,31 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: ${{ github.head_ref }}
+
+  lint-only:
+    runs-on: ubuntu-latest
+    needs: check-last-commit
+    if: needs.check-last-commit.outputs.skip_build == 'true'
+
+    steps:
+      # Checkout PR branch
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Install pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Install dependencies
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Run lint only
+      - name: Run lint
+        run: pnpm lint
