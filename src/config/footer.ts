@@ -25,7 +25,7 @@ export const footerConfig: TFooterConfig = {
       icon: {
         ariaLabel: "GitHub Page",
         href: baseConfig.github,
-        iconName: "FaGithub",
+        iconName: "IoLogoGithub",
       },
       id: nanoid(),
     },

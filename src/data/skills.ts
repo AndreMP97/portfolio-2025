@@ -15,10 +15,25 @@ const generateSkill = (props: TSkillCardProps): TSkillData => ({
 });
 
 export const skillsData: TSkillData[] = [
-  generateSkill({ description: "HTML, CSS, TypeScript", iconName: "FaCode" }),
-  generateSkill({ description: "React.js, React Native", iconName: "FaReact" }),
-  generateSkill({ description: "Responsive Design", iconName: "FaMobileAlt" }),
-  generateSkill({ description: "Git & Version Control", iconName: "FaGitAlt" }),
-  generateSkill({ description: "DevTools & Debugging", iconName: "FaTools" }),
-  generateSkill({ description: "Optimization", iconName: "FaTachometerAlt" }),
+  generateSkill({
+    description: "HTML, CSS, TypeScript",
+    iconName: "IoCodeSlashOutline",
+  }),
+  generateSkill({
+    description: "React.js, React Native",
+    iconName: "IoLogoReact",
+  }),
+  generateSkill({
+    description: "Responsive Design",
+    iconName: "IoPhonePortraitOutline",
+  }),
+  generateSkill({
+    description: "Git & Version Control",
+    iconName: "IoGitMergeOutline",
+  }),
+  generateSkill({
+    description: "DevTools & Debugging",
+    iconName: "IoHammer",
+  }),
+  generateSkill({ description: "Optimization", iconName: "IoSpeedometer" }),
 ] as const;

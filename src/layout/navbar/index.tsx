@@ -1,8 +1,8 @@
 // Framer-motion
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Components
-import { Icon } from "components/icon";
+import Hamburger from "hamburger-react";
 import { LogoLink } from "components/logoLink";
 import { DesktopNavbar } from "./components/desktop";
 import { MobileNavbar } from "./components/mobile";
@@ -51,25 +51,16 @@ export const Navbar: React.FC = () => {
         <DesktopNavbar navLinks={navLinks} />
 
         {/* Mobile Toggle Button */}
-        <button
-          className="text-2xl text-white focus-visible:outline-none md:hidden"
-          onClick={toggleMobileMenu}
-          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={isMobileMenuOpen ? "close" : "menu"}
-              variants={navbarAnimations.toggleIcon}
-              transition={{ duration: 0.2 }}
-            >
-              {isMobileMenuOpen ? (
-                <Icon iconName="FaTimes" />
-              ) : (
-                <Icon iconName="FaBars" />
-              )}
-            </motion.span>
-          </AnimatePresence>
-        </button>
+        <div className="text-white focus-visible:outline-none md:hidden">
+          <Hamburger
+            distance="md"
+            hideOutline
+            label="Menu Button"
+            size={28}
+            toggled={isMobileMenuOpen}
+            toggle={toggleMobileMenu}
+          />
+        </div>
       </nav>
 
       <MobileNavbar

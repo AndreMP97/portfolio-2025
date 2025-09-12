@@ -14,14 +14,14 @@ export const contactData: TContactCardProps = {
       href: baseConfig.linkedin,
       id: nanoid(),
       label: "LinkedIn Profile",
-      leftIcon: "FaLinkedin",
+      leftIcon: "IoLogoLinkedin",
     },
     {
       ariaLabel: "Personal email",
       href: baseConfig.email,
       id: nanoid(),
       label: "Email",
-      leftIcon: "FaEnvelope",
+      leftIcon: "IoPaperPlane",
     },
   ],
   description:

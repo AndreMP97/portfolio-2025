@@ -1,4 +1,5 @@
-import { Icon, TIconProps } from "components/icon";
+import { Icon } from "components/icon";
+import { TIconProps } from "components/icon/types";
 
 export type TIconLinkProps = TIconProps & {
   /**

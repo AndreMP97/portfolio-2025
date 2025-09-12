@@ -82,7 +82,7 @@ export const ExperienceCard: React.FC<TExperienceCardProps> = ({
           variants={experienceCardAnimations.position}
           className="flex items-center gap-3"
         >
-          <Icon className="text-aqua-mint" iconName="FaBriefcase" />
+          <Icon className="text-aqua-mint" iconName="IoBriefcase" />
           <h3 className="group-hover:text-aqua-mint text-xl leading-normal font-semibold text-white">
             {position}
           </h3>
