@@ -1,5 +1,7 @@
+import * as path from 'path';
 import { defineConfig } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
+import { pluginSvgr } from '@rsbuild/plugin-svgr';
 
 export default defineConfig({
   html: {
@@ -9,5 +11,13 @@ export default defineConfig({
     },
     template: "./src/assets/index.html",
   },
-  plugins: [pluginReact()],
+  plugins: [
+    pluginReact(),
+    pluginSvgr(),
+  ],
+  resolve: {
+    alias: {
+      '@assets': path.resolve(__dirname, 'src/assets'),
+    },
+  },
 });

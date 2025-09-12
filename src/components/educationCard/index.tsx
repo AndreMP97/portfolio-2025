@@ -13,6 +13,7 @@ import { useSectionInView } from "hooks/useSectionInView";
 // Types
 import { educationCardType, TEducationCardType } from "./types";
 import { useMemo } from "react";
+import { TIconName } from "components/icon/types";
 
 export type TEducationCardProps = {
   /**
@@ -72,11 +73,8 @@ export const EducationCard: React.FC<TEducationCardProps> = ({
 }) => {
   const { ref, motionProps } = useSectionInView();
 
-  const iconName = useMemo(
-    () =>
-      type === educationCardType.university
-        ? "FaGraduationCap"
-        : "FaCertificate",
+  const iconName: TIconName = useMemo(
+    () => (type === educationCardType.university ? "IoSchool" : "IoRibbon"),
     [type],
   );
 

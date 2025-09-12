@@ -2,7 +2,7 @@
 import { Icon } from "components/icon";
 
 // Types
-import { TIconName } from "utils/icons";
+import { TIconName } from "components/icon/types";
 
 export type TSkillCardProps = {
   /**
