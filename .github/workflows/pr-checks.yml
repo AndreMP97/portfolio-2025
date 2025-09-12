@@ -6,28 +6,136 @@ on:
       - main
     types: [opened, synchronize, reopened]
 
+# Allow workflow to trigger itself
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
+  check-last-commit:
+    runs-on: ubuntu-latest
+    outputs:
+      skip_build: ${{ steps.check.outputs.skip_build }}
+    steps:
+      # Checkout the real PR head commit (not the temporary merge commit)
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      # Setup Node.js so we can read package.json
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Check last commit message for automated bump pattern
+      - name: Check last commit message
+        id: check
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          COMMIT_MSG=$(git log -1 --pretty=%s)
+          echo "Last commit message: $COMMIT_MSG"
+          if [[ "$COMMIT_MSG" =~ ^chore:\ bump\ version$ ]]; then
+            echo "skip_build=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip_build=false" >> "$GITHUB_OUTPUT"
+          fi
+
   build-test-lint:
     runs-on: ubuntu-latest
+    needs: check-last-commit
+    if: needs.check-last-commit.outputs.skip_build == 'false'
 
     steps:
       # Checkout PR branch
-      - uses: actions/checkout@v3
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
 
       # Setup Node.js
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 20
 
       # Install pnpm
-      - run: npm install -g pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       # Install dependencies
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      # Build project with rsbuild
-      - run: pnpm exec rsbuild build
+      # Run typecheck
+      - name: Run typecheck
+        run: pnpm typecheck
 
-      # Run typecheck and lint
-      - run: pnpm typecheck
-      - run: pnpm lint
+      # Run lint
+      - name: Run lint
+        run: pnpm lint
+
+      # Clean /docs folder
+      - name: Clean /docs folder
+        run: rm -rf docs
+
+      # Build project
+      - name: Build project
+        run: pnpm exec rsbuild build
+
+      # Replace docs
+      - name: Replace docs
+        run: mv dist docs
+
+      # Create CNAME file
+      - name: Create CNAME file
+        run: |
+          echo "$CNAME_DOMAIN" > docs/CNAME
+        env:
+          CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
+
+      # Pull latest changes, and push all changes
+      - name: Pull latest changes, bump version, and push
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git stash
+          git pull --rebase origin $BRANCH_NAME
+          git stash pop || echo "No stashed changes"
+          git add docs
+          git commit -m "chore: build new docs" || echo "No changes to commit"
+          git push origin HEAD:$BRANCH_NAME
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: ${{ github.head_ref }}
+
+  lint-only:
+    runs-on: ubuntu-latest
+    needs: check-last-commit
+    if: needs.check-last-commit.outputs.skip_build == 'true'
+
+    steps:
+      # Checkout PR branch
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Install pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Install dependencies
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Run lint only
+      - name: Run lint
+        run: pnpm lint
