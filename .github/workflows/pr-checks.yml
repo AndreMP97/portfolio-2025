@@ -5,12 +5,10 @@ on:
     branches:
       - main
     types: [opened, synchronize, reopened]
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   check-last-commit:
@@ -96,6 +94,7 @@ jobs:
         env:
           CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
 
+      # Commit docs and conditional version bump using PAT
       - name: Commit docs and conditional version bump
         run: |
           git config --local user.name "github-actions[bot]"
@@ -125,9 +124,11 @@ jobs:
           # Always commit docs (and package.json if bumped)
           git add package.json pnpm-lock.yaml docs
           git commit -m "chore: bump version and update docs to $(node -p "require('./package.json').version")" || echo "No changes to commit"
-          git push origin HEAD:$BRANCH_NAME
+
+          # Push using PAT token so workflow triggers again
+          git push https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }} HEAD:${BRANCH_NAME}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
           BRANCH_NAME: ${{ github.head_ref }}
 
   lint-only:
