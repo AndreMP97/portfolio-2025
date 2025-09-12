@@ -10,8 +10,8 @@ interface INavbarAnimations {
   desktopLinks: Variants;
   logo: Variants;
   mobileMenu: Variants;
-  mobileMenuItem: Variants;
-  toggleIcon: Variants;
+  mobileMenuLinks: Variants;
+  mobileMenuLinksItem: Variants;
 }
 
 export const navbarAnimations: INavbarAnimations = {
@@ -28,20 +28,24 @@ export const navbarAnimations: INavbarAnimations = {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.2,
       },
     },
   },
-  logo: fadeDown(),
+  logo: fadeDown(0.8),
   mobileMenu: {
     exit: { transition: { duration: 0.3, type: "tween" }, x: "100%" },
     hidden: { x: "100%" },
     visible: { transition: { duration: 0.3, type: "tween" }, x: 0 },
   },
-  mobileMenuItem: fadeUp(),
-  toggleIcon: {
-    animate: { opacity: 1, rotate: 0, scale: 1 },
-    exit: { opacity: 0, rotate: 90, scale: 0.8 },
-    initial: { opacity: 0, rotate: -90, scale: 0.8 },
+  mobileMenuLinks: {
+    hidden: {},
+    visible: {
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.2,
+      },
+    },
   },
+  mobileMenuLinksItem: fadeUp(),
 };
