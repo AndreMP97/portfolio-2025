@@ -36,7 +36,7 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           COMMIT_MSG=$(git log -1 --pretty=%s)
           echo "Last commit message: $COMMIT_MSG"
-          if [[ "$COMMIT_MSG" =~ ^chore:\ bump\ version\ and\ update\ docs\ to\ ${VERSION}$ ]]; then
+          if [[ "$COMMIT_MSG" =~ ^chore:\ bump\ version$ ]]; then
             echo "skip_build=true" >> "$GITHUB_OUTPUT"
           else
             echo "skip_build=false" >> "$GITHUB_OUTPUT"
@@ -95,47 +95,18 @@ jobs:
         env:
           CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
 
-      # Commit docs and conditional version bump using PAT
-      - name: Commit docs and conditional version bump
+      # Pull latest changes, bump version, and push all changes
+      - name: Pull latest changes, bump version, and push
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Fetch main properly to avoid "new branch" messages
-          git fetch origin main:refs/remotes/origin/main
-
-          # Stash local changes (docs, package.json, etc.)
-          git stash push --include-untracked || true
-
-          # Rebase PR branch on top of main
-          git rebase origin/main || git rebase --abort
-
-          # Restore stashed changes
-          git stash pop || true
-
-          # Re-read versions *after* fetch and rebase
-          MAIN_VERSION=$(git show origin/main:package.json | grep '"version"' | head -1 | sed -e 's/.*"version": *"\([^"]*\)".*/\1/')
-          BRANCH_VERSION=$(node -p "require('./package.json').version")
-
-          echo "Main version: $MAIN_VERSION"
-          echo "Current branch version: $BRANCH_VERSION"
-
-          # Bump only if branch version exactly matches main
-          if [ "$BRANCH_VERSION" = "$MAIN_VERSION" ]; then
-            echo "Version matches main; bumping one patch above."
-            npm version patch --no-git-tag-version
-          else
-            echo "Branch already ahead of main ($BRANCH_VERSION). Skipping version bump."
-          fi
-
-          # Always commit docs (and package.json if bumped)
+          git pull --rebase origin $BRANCH_NAME
+          npm version patch --no-git-tag-version
           git add package.json pnpm-lock.yaml docs
-          git commit -m "chore: bump version and update docs to $(node -p "require('./package.json').version")" || echo "No changes to commit"
-
-          # Push using PAT token so workflow triggers again
-          git push https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }} HEAD:${BRANCH_NAME}
+          git commit -m "chore: build new docs" || echo "No changes to commit"
+          git push origin HEAD:$BRANCH_NAME
         env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: ${{ github.head_ref }}
 
   lint-only:
