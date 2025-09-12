@@ -72,7 +72,7 @@ export const ExperienceCard: React.FC<TExperienceCardProps> = ({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group border-aqua-mint bg-midnight-navy focus-ring-lg flex flex-col gap-3 rounded-lg border-l-2 p-5 pl-6 shadow-lg transition-all duration-300 hover:border-white hover:shadow-2xl"
+      className="group border-aqua-mint bg-midnight-navy focus-ring-lg flex flex-col gap-3 rounded-lg border-l-2 p-5 pl-6 shadow-lg transition-all duration-300 will-change-[transform,opacity] hover:border-white hover:shadow-2xl"
     >
       <motion.div
         variants={experienceCardAnimations.content}

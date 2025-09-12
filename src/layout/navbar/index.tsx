@@ -51,7 +51,10 @@ export const Navbar: React.FC = () => {
         <DesktopNavbar navLinks={navLinks} />
 
         {/* Mobile Toggle Button */}
-        <div className="text-white focus-visible:outline-none md:hidden">
+        <motion.div
+          variants={navbarAnimations.logo}
+          className="text-white focus-visible:outline-none md:hidden"
+        >
           <Hamburger
             distance="md"
             hideOutline
@@ -60,7 +63,7 @@ export const Navbar: React.FC = () => {
             toggled={isMobileMenuOpen}
             toggle={toggleMobileMenu}
           />
-        </div>
+        </motion.div>
       </nav>
 
       <MobileNavbar
