@@ -1,18 +1,26 @@
 {
   "name": "portfolio-2025",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "private": true,
   "type": "module",
   "scripts": {
-    "generate-icons": "tsx src/scripts/generateIcons.ts",
-    "build": "rsbuild build",
+    "bump-dependencies": "ncu -u && rm -f pnpm-lock.yaml && pnpm install && git add pnpm-lock.yaml package.json && git commit -m \"chore: bump dependencies\" || echo 'No changes to commit'",
+    "bump-version": "npm version patch --no-git-tag-version && git add package.json && git commit -m \"chore: bump version\" || echo 'No version bump'",
+    "build": "pnpm run clean && rsbuild build",
+    "check": "pnpm run lint && pnpm run typecheck",
+    "clean": "rm -rf dist",
     "dev": "rsbuild dev --open",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "generate-icons": "pnpm exec tsx src/scripts/generateIcons.ts",
+    "lint": "pnpm exec eslint src/**/*.{ts,tsx}",
+    "lint:fix": "pnpm exec eslint src/**/*.{ts,tsx} --fix",
     "preview": "rsbuild preview",
-    "lint": "eslint src/**/*.{ts,tsx}",
-    "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
-    "typecheck": "tsc --project tsconfig.json --noEmit",
     "precommit": "lint-staged",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typecheck": "pnpm exec tsc --project tsconfig.json --noEmit",
+    "watch": "rsbuild dev --watch",
+    "ci": "pnpm run check && pnpm run build"
   },
   "dependencies": {
     "framer-motion": "^12.23.12",

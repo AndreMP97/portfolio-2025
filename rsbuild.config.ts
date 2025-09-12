@@ -9,7 +9,8 @@ export default defineConfig({
     meta: {
       charset: { charset: "UTF-8" },
       description: "André Pacheco's Portfolio",
-      keywords: "André Pacheco, Portfolio, Software Engineer, Web Developer, Frontend Developer, JavaScript, TypeScript, React.js, React.Native, Node.js, HTML, CSS",
+      keywords:
+        "André Pacheco, Portfolio, Software Engineer, Web Developer, Frontend Developer, JavaScript, TypeScript, React.js, React.Native, Node.js, HTML, CSS",
       viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
     },
     template: "./src/assets/index.html",
@@ -29,10 +30,7 @@ export default defineConfig({
     },
     removeConsole: true,
   },
-  plugins: [
-    pluginReact(),
-    pluginSvgr(),
-  ],
+  plugins: [pluginReact(), pluginSvgr()],
   resolve: {
     alias: {
       "@assets": path.resolve(__dirname, "src/assets"),
