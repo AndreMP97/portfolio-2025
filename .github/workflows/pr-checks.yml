@@ -12,7 +12,7 @@ jobs:
     outputs:
       skip_build: ${{ steps.check.outputs.skip_build }}
     steps:
-      # Checkout the actual PR HEAD commit, not the merge commit
+      # Checkout the real PR head commit (not the temporary merge commit)
       - name: Checkout PR branch
         uses: actions/checkout@v3
         with:
@@ -24,14 +24,13 @@ jobs:
         with:
           node-version: 20
 
-      # ✅ Determine if the latest commit matches the automated bump message
+      # Check last commit message for automated bump pattern
       - name: Check last commit message
         id: check
         run: |
           VERSION=$(node -p "require('./package.json').version")
           COMMIT_MSG=$(git log -1 --pretty=%s)
           echo "Last commit message: $COMMIT_MSG"
-          # Match exactly: chore: bump version and update docs to <VERSION>
           if [[ "$COMMIT_MSG" =~ ^chore:\ bump\ version\ and\ update\ docs\ to\ ${VERSION}$ ]]; then
             echo "skip_build=true" >> "$GITHUB_OUTPUT"
           else
@@ -91,13 +90,32 @@ jobs:
         env:
           CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
 
-      # Pull latest changes safely, bump version, and push
-      - name: Pull latest changes, bump version, and push
+      # ✅ Conditionally bump version and always commit docs
+      - name: Commit docs and conditional version bump
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Fetch main to compare versions
+          git fetch origin main
+          MAIN_VERSION=$(git show origin/main:package.json | node -p "require('./package.json').version")
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+
+          echo "Main version: $MAIN_VERSION"
+          echo "Current branch version: $CURRENT_VERSION"
+
+          # --autostash prevents 'unstaged changes' error during rebase
           git pull --rebase --autostash origin $BRANCH_NAME
-          npm version patch --no-git-tag-version
+
+          # Only bump the version if branch equals main
+          if [ "$CURRENT_VERSION" = "$MAIN_VERSION" ]; then
+            echo "Version matches main; bumping one patch above."
+            npm version patch --no-git-tag-version
+          else
+            echo "Branch already ahead of main ($CURRENT_VERSION). Skipping version bump."
+          fi
+
+          # Always commit docs (and package.json if bumped)
           git add package.json pnpm-lock.yaml docs
           git commit -m "chore: bump version and update docs to $(node -p "require('./package.json').version")" || echo "No changes to commit"
           git push origin HEAD:$BRANCH_NAME
