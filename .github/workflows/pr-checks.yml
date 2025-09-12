@@ -12,27 +12,30 @@ jobs:
     outputs:
       skip_build: ${{ steps.check.outputs.skip_build }}
     steps:
-      # Checkout PR branch
+      # Checkout the actual PR HEAD commit, not the merge commit
       - name: Checkout PR branch
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
 
-      # Setup Node.js (needed to read package.json version)
+      # Setup Node.js so we can read package.json
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      # Get last commit message and compare to expected version bump message
+      # ✅ Determine if the latest commit matches the automated bump message
       - name: Check last commit message
         id: check
         run: |
           VERSION=$(node -p "require('./package.json').version")
           COMMIT_MSG=$(git log -1 --pretty=%s)
           echo "Last commit message: $COMMIT_MSG"
-          if [[ "$COMMIT_MSG" == "chore: bump version and update docs to $VERSION" ]]; then
-            echo "skip_build=true" >> $GITHUB_OUTPUT
+          # Match exactly: chore: bump version and update docs to <VERSION>
+          if [[ "$COMMIT_MSG" =~ ^chore:\ bump\ version\ and\ update\ docs\ to\ ${VERSION}$ ]]; then
+            echo "skip_build=true" >> "$GITHUB_OUTPUT"
           else
-            echo "skip_build=false" >> $GITHUB_OUTPUT
+            echo "skip_build=false" >> "$GITHUB_OUTPUT"
           fi
 
   build-test-lint:
@@ -44,6 +47,8 @@ jobs:
       # Checkout PR branch
       - name: Checkout PR branch
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
 
       # Setup Node.js
       - name: Setup Node.js
@@ -86,7 +91,7 @@ jobs:
         env:
           CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
 
-      # Pull latest changes, bump version, and push
+      # Pull latest changes safely, bump version, and push
       - name: Pull latest changes, bump version, and push
         run: |
           git config --local user.name "github-actions[bot]"
@@ -109,6 +114,8 @@ jobs:
       # Checkout PR branch
       - name: Checkout PR branch
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
 
       # Setup Node.js
       - name: Setup Node.js
