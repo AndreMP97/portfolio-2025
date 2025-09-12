@@ -90,29 +90,30 @@ jobs:
         env:
           CNAME_DOMAIN: ${{ secrets.CNAME_DOMAIN }}
 
-      # ✅ Conditionally bump version and always commit docs
       - name: Commit docs and conditional version bump
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Fetch main to compare versions
+          # Always fetch latest main first
           git fetch origin main
+
+          # Make sure we are rebased on main so we can compare cleanly
+          git pull --rebase origin $BRANCH_NAME
+
+          # Re-read versions *after* fetch and rebase
           MAIN_VERSION=$(git show origin/main:package.json | node -p "require('./package.json').version")
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          BRANCH_VERSION=$(node -p "require('./package.json').version")
 
           echo "Main version: $MAIN_VERSION"
-          echo "Current branch version: $CURRENT_VERSION"
+          echo "Current branch version: $BRANCH_VERSION"
 
-          # --autostash prevents 'unstaged changes' error during rebase
-          git pull --rebase --autostash origin $BRANCH_NAME
-
-          # Only bump the version if branch equals main
-          if [ "$CURRENT_VERSION" = "$MAIN_VERSION" ]; then
+          # Bump only if branch version exactly matches main
+          if [ "$BRANCH_VERSION" = "$MAIN_VERSION" ]; then
             echo "Version matches main; bumping one patch above."
             npm version patch --no-git-tag-version
           else
-            echo "Branch already ahead of main ($CURRENT_VERSION). Skipping version bump."
+            echo "Branch already ahead of main ($BRANCH_VERSION). Skipping version bump."
           fi
 
           # Always commit docs (and package.json if bumped)
